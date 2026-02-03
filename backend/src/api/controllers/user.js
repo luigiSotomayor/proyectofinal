@@ -1,4 +1,7 @@
+import { generateSign } from "../../utils/jwt.js";
 import User from "../models/user.js";
+import bcrypt from "bcrypt";
+
 
 const getUsers = async (req, res, next) => {
   try {
@@ -36,6 +39,25 @@ const postUser = async (req, res, next) => {
   }
 };
 
+const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json("Los datos introducidos no son correctos");
+    }
+    if (bcrypt.compareSync(password, user.password)) {
+      const token = generateSign(user._id);
+      return res.status(200).json({ token, user });
+    } else {
+      return res.status(400).json("Los datos introducidos no son correctos");
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json("Error al iniciar sesión");
+  }
+}
+
 const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -65,5 +87,6 @@ export {
     getUser,
     postUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    login
 }
