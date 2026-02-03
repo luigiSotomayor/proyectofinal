@@ -1,4 +1,4 @@
-import User from "../models/team.js";
+import Team from "../models/team.js";
 
 const getTeams = async (req, res, next) => {
   try {
@@ -22,7 +22,7 @@ const getTeam = async (req, res, next) => {
 const postTeam = async (req, res, next) => {
   try {
     const newTeam = new Team(req.body);
-    const teamSaved = await newteam.save();
+    const teamSaved = await newTeam.save();
     return res.status(201).json(teamSaved);
   } catch (error) {
     return res.status(400).json("Error al crear el equipo");
