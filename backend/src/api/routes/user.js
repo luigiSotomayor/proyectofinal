@@ -1,6 +1,8 @@
-const { getUsers, getUser, postUser, updateUser, deleteUser, login } = require('../controllers/user');
+import { getUsers, getUser, postUser, updateUser, deleteUser, login } from '../controllers/user.js';
+import isAuth from '../../middlewares/isAuth.js';
 
-const userRouter = require('express').Router();
+import express from 'express';
+const userRouter = express.Router();
 
 userRouter.get("/", getUsers);
 userRouter.get("/:id", getUser);
@@ -9,4 +11,4 @@ userRouter.post("/login", login);
 userRouter.put("/:id", updateUser);
 userRouter.delete("/:id", deleteUser);
 
-module.exports = userRouter;
+export default userRouter;

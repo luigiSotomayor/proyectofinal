@@ -1,11 +1,13 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
+
+const { sign, verify } = jwt;
 
 const generateSign = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+    return sign({ id }, process.env.JWT_SECRET, { expiresIn: '1d' });
 }
 
 const verifySign = (token) => {
-    return jwt.verify(token, process.env.JWT_SECRET);
+    return verify(token, process.env.JWT_SECRET);
 }
 
-module.exports = { generateSign, verifySign };
+export { generateSign, verifySign };

@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+import { Schema, model } from "mongoose";
+import { hashSync } from "bcrypt";
 
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
   {
     firstName: { type: String, required: true, trim: true },
     lastName: { type: String, required: true, trim: true },
@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema(
       ],
     },
     dorsal: {type: Number},
-    team: {type: mongoose.Schema.Types.ObjectId, ref: 'Team' },
+    team: {type: Schema.Types.ObjectId, ref: 'Team' },
   },
   {
     timestamps: true,
@@ -38,9 +38,9 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.pre("save", function () {
-  this.password = bcrypt.hashSync(this.password, 10);
+  this.password = hashSync(this.password, 10);
 })
 
-const User = mongoose.model("users", userSchema, "users");
+const User = model("users", userSchema, "users");
 
-module.exports = User;
+export default User;

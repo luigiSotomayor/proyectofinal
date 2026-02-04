@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const matchSchema = new mongoose.Schema({
-    team: { type: mongoose.Schema.Types.ObjectId, ref: "Team", requires: true },
+const matchSchema = new Schema({
+    team: { type: Schema.Types.ObjectId, ref: "Team", requires: true },
     rival: { type: String, required: true},
     date: { type: Date, required: true },
     home: { type: Boolean, required: true },
@@ -9,7 +9,7 @@ const matchSchema = new mongoose.Schema({
     championship: {type: String, enum: ["amistoso", "liga", "copa"], required: true},
     stats: [
         {
-            player: {type:  mongoose.Schema.Types.ObjectId, ref: "User"},
+            player: {type:  Schema.Types.ObjectId, ref: "User"},
             minutes: {type: Number},
             titular: {type: Boolean},
             yellowCards: {type: Boolean, default: false},
@@ -22,6 +22,6 @@ const matchSchema = new mongoose.Schema({
     ]
 }, {timestamps: true});
 
-const Match = mongoose.model("matches", matchSchema, "matches");
+const Match = model("matches", matchSchema, "matches");
 
-module.exports = Match;
+export default Match;

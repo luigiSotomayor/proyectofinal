@@ -1,16 +1,18 @@
-require("dotenv").config();
-const express = require("express");
-const { connectDB } = require("./src/config/db");
-const matchRouter = require("./src/api/routes/match");
-const userRouter = require("./src/api/routes/user");
-const trainingRouter = require("./src/api/routes/training");
-const teamRouter = require("./src/api/routes/team");
+import dotenv from "dotenv";
+import express, { json } from "express";
+import { connectDB } from "./src/config/db.js";
+import matchRouter from "./src/api/routes/match.js";
+import userRouter from "./src/api/routes/user.js";
+import trainingRouter from "./src/api/routes/training.js";
+import teamRouter from "./src/api/routes/team.js";
+
+dotenv.config();
 
 const app = express();
 
 connectDB();
 
-app.use(express.json());   
+app.use(json());   
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/trainig", trainingRouter);

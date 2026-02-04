@@ -1,6 +1,7 @@
-const { getTrainings, getTraining, postTraining, updateTraining, deleteTraining } = require('../controllers/training');
+import { getTrainings, getTraining, postTraining, updateTraining, deleteTraining } from '../controllers/training.js';
 
-const trainingRouter = require('express').Router();
+import express from 'express';
+const trainingRouter = express.Router();
 
 trainingRouter.get("/", getTrainings);
 trainingRouter.get("/:id", getTraining);
@@ -8,4 +9,4 @@ trainingRouter.post("/", postTraining);
 trainingRouter.put("/:id", updateTraining);
 trainingRouter.delete("/:id", deleteTraining);
 
-module.exports = trainingRouter;
+export default trainingRouter;

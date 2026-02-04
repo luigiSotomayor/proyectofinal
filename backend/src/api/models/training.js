@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const trainingSchema = new mongoose.Schema({
-  team: { type: mongoose.Schema.Types.ObjectId, ref: "Team", required: true },
+const trainingSchema = new Schema({
+  team: { type: Schema.Types.ObjectId, ref: "Team", required: true },
   date: { type: Date, required: true },
   stats: [
     {
       player: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User",
         required: true,
       },
@@ -16,6 +16,6 @@ const trainingSchema = new mongoose.Schema({
   ],
 }, {timestamps: true});
 
-const Training = mongoose.model("trainings", trainingSchema, "trainings");
+const Training = model("trainings", trainingSchema, "trainings");
 
-module.exports = Training;
+export default Training;

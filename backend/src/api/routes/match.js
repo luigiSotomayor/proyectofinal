@@ -1,6 +1,7 @@
-const { getMatches, getMatch, postMatch, updateMatch, deleteMatch } = require('../controllers/match');
+import { getMatches, getMatch, postMatch, updateMatch, deleteMatch } from '../controllers/match.js';
 
-const matchRouter = require('express').Router();
+import express from 'express';
+const matchRouter = express.Router();
 
 matchRouter.get("/", getMatches);
 matchRouter.get("/:id", getMatch);
@@ -8,4 +9,4 @@ matchRouter.post("/", postMatch);
 matchRouter.put("/:id", updateMatch);
 matchRouter.delete("/:id", deleteMatch);
 
-module.exports = matchRouter;
+export default matchRouter;
