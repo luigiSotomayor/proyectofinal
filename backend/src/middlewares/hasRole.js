@@ -5,7 +5,7 @@ const hasRole = (roles = []) => {
     }
 
     if (!roles.includes(req.user.role)) {
-      return res.status(403).json("Access denied");
+      return res.status(401).json("Access denied");
     }
 
     next();

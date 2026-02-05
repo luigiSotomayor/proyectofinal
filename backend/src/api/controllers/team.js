@@ -36,7 +36,7 @@ const updateTeam = async (req, res, next) => {
     newTeam._id = id;
     const teamUpdated = await Team.findByIdAndUpdate(id, newTeam, {
       new: true,
-    }).populate("players");
+    }).populate("players").populate("coach");
     return res.status(200).json(teamUpdated);
   } catch (error) {
     return res.status(400).json("Error al actualizar el equipo");

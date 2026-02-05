@@ -30,10 +30,9 @@ const canAccessUpdateTeam = async (req, res, next) => {
       return next();
     }
 
-    return res.status(403).json("Access denied");
+    return res.status(401).json("Access denied");
   } catch (error) {
-    console.log(error);
-    return res.status(403).json("Access denied");
+    return res.status(400).json("Bad request");
   }
 };
 
