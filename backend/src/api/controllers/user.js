@@ -44,12 +44,14 @@ const login = async (req, res, next) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
+      console.log("Usuario no encontrado");
       return res.status(400).json("Los datos introducidos no son correctos");
     }
     if (bcrypt.compareSync(password, user.password)) {
       const token = generateSign(user._id);
       return res.status(200).json({ token, user });
     } else {
+      console.log("Contraseña incorrecta");
       return res.status(400).json("Los datos introducidos no son correctos");
     }
   } catch (error) {
