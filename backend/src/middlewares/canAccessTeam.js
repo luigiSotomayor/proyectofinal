@@ -1,4 +1,4 @@
-import Team from "../models/team.js";
+import Team from "../api/models/team.js";
 
 const canAccessTeam = async (req, res, next) => {
   try {
