@@ -4,7 +4,7 @@ import isAuth from '../../middlewares/isAuth.js';
 import express from 'express';
 const userRouter = express.Router();
 
-userRouter.get("/", getUsers);
+userRouter.get("/", isAuth, getUsers);
 userRouter.get("/:id", getUser);
 userRouter.post("/", postUser); 
 userRouter.post("/login", login);

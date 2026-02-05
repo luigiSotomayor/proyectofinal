@@ -4,7 +4,6 @@ import { verifySign } from "../utils/jwt.js";
 const isAuth = async(req, res, next) => {
     try {
         const [, token] = req.headers.authorization.split(" ");
-        console.log(token);
         const { id } = verifySign(token);
 
         const user = await User.findById(id);

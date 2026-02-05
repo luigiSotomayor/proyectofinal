@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 
 const matchSchema = new Schema({
-    team: { type: Schema.Types.ObjectId, ref: "Team", requires: true },
+    team: { type: Schema.Types.ObjectId, ref: "teams", requires: true },
     rival: { type: String, required: true},
     date: { type: Date, required: true },
     home: { type: Boolean, required: true },
@@ -9,7 +9,7 @@ const matchSchema = new Schema({
     championship: {type: String, enum: ["amistoso", "liga", "copa"], required: true},
     stats: [
         {
-            player: {type:  Schema.Types.ObjectId, ref: "User"},
+            player: {type:  Schema.Types.ObjectId, ref: "users"},
             minutes: {type: Number},
             titular: {type: Boolean},
             yellowCards: {type: Boolean, default: false},

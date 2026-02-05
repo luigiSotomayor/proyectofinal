@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 import { hashSync } from "bcrypt";
 
 const userSchema = new Schema(
@@ -30,7 +30,7 @@ const userSchema = new Schema(
       ],
     },
     dorsal: {type: Number},
-    team: {type: Schema.Types.ObjectId, ref: 'Team' },
+    //team: {type: mongoose.Types.ObjectId, ref: 'teams' },
   },
   {
     timestamps: true,

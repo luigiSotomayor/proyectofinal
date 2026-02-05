@@ -2,7 +2,7 @@ import Team from "../models/team.js";
 
 const getTeams = async (req, res, next) => {
   try {
-    const teams = await Team.find();
+    const teams = await Team.find().populate("players");
     return res.status(200).json(teams);
   } catch (error) {
     return res.status(400).json("Error al obtener los equipos");
@@ -12,7 +12,7 @@ const getTeams = async (req, res, next) => {
 const getTeam = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const newTeam = await Team.findById(id);
+        const newTeam = await Team.findById(id).populate("players");
         return res.status(200).json(newTeam);
     } catch (error) {
         return res.status(400).json("Error al obtener el equipo");
@@ -36,7 +36,7 @@ const updateTeam = async (req, res, next) => {
     newTeam._id = id;
     const teamUpdated = await Team.findByIdAndUpdate(id, newTeam, {
       new: true,
-    });
+    }).populate("players");
     return res.status(200).json(teamUpdated);
   } catch (error) {
     return res.status(400).json("Error al actualizar el equipo");

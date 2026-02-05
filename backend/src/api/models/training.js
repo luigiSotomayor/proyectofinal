@@ -1,13 +1,13 @@
 import { Schema, model } from "mongoose";
 
 const trainingSchema = new Schema({
-  team: { type: Schema.Types.ObjectId, ref: "Team", required: true },
+  team: { type: Schema.Types.ObjectId, ref: "teams", required: true },
   date: { type: Date, required: true },
   stats: [
     {
       player: {
         type: Schema.Types.ObjectId,
-        ref: "User",
+        ref: "users",
         required: true,
       },
       attendance: { type: String, enum: ["S", "F", "FJ", "R"], required: true },

@@ -1,10 +1,10 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 const teamSchema = new Schema(
   {
     name: { type: String, required: true, unique: true },
-    players: [{ type: Schema.Types.ObjectId, ref: "User" }],
-    coach: { type: Schema.Types.ObjectId, ref: "User" },
+    players: [{ type: mongoose.Types.ObjectId, ref: "users" }],
+    coach: { type: mongoose.Types.ObjectId, ref: "users" },
   },
   { timestamps: true }
 );
