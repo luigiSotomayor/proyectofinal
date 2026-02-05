@@ -1,6 +1,6 @@
 const canAccessUser = (req, res, next) => {
-  const loggedUser = req.user;      // usuario autenticado
-  const targetUserId = req.params.id; // usuario que se quiere ver/modificar
+  const loggedUser = req.user;
+  const targetUserId = req.params.id;
 
   // Director deportivo puede acceder a cualquiera
   if (loggedUser.role === "director deportivo") {

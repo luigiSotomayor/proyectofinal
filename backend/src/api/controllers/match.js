@@ -9,6 +9,19 @@ const getMatches = async (req, res, next) => {
   }
 };
 
+const getMatchesByTeam = async (req, res, next) => {
+  try {
+    const { teamId } = req.params;
+
+    const matches = await Match.find({ team: teamId }).populate("team", "name");
+
+    return res.status(200).json(matches);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json("Error al obtener los partidos del equipo");
+  }
+}
+
 const getMatch = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -55,6 +68,7 @@ const deleteMatch = async (req, res, next) => {
 
 export {
     getMatches,
+    getMatchesByTeam,
     getMatch,
     postMatch,
     updateMatch,

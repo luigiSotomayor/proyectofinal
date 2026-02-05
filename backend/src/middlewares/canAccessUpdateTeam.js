@@ -1,0 +1,40 @@
+import Team from "../models/team.js";
+
+const canAccessUpdateTeam = async (req, res, next) => {
+  try {
+    const user = req.user;
+
+    const teamId =
+      req.params.teamId || req.params.id;
+
+    if (!teamId) {
+      return res.status(400).json("Team id is required");
+    }
+
+    //El director deportivo tiene acceso total
+    if (user.role === "director deportivo") {
+      return next();
+    }
+
+    const team = await Team.findById(teamId);
+
+    if (!team) {
+      return res.status(404).json("Team not found");
+    }
+
+    //Si es entrenador del equipo tiene acceso al mismo
+    if (
+      user.role === "entrenador" &&
+      team.coach?.toString() === user._id.toString()
+    ) {
+      return next();
+    }
+
+    return res.status(403).json("Access denied");
+  } catch (error) {
+    console.log(error);
+    return res.status(403).json("Access denied");
+  }
+};
+
+export default canAccessUpdateTeam;
