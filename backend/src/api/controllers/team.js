@@ -2,7 +2,7 @@ import Team from "../models/team.js";
 
 const getTeams = async (req, res, next) => {
   try {
-    const teams = await Team.find().populate("players");
+    const teams = await Team.find().populate("players").populate("coach");
     return res.status(200).json(teams);
   } catch (error) {
     return res.status(400).json("Error al obtener los equipos");

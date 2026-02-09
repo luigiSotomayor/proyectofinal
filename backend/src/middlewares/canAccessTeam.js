@@ -6,7 +6,7 @@ const canAccessTeam = async (req, res, next) => {
 
     const teamId =
       req.params.teamId || req.params.id;
-
+      console.log("Team ID from params:", teamId);
     if (!teamId) {
       return res.status(400).json("Team id is required");
     }
