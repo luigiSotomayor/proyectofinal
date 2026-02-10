@@ -1,0 +1,37 @@
+﻿userCode;firstName;lastName;birthday;phone;email;nationality;password;role;position;dorsal
+U0001;Carlos;Mendoza Ruiz;2007-03-12;612345788;carlos.mendoza12@mailfalso.com;España;12345678;jugador;portero;1
+U0002;Alejandro;Ruiz Martín;2007-02-14;612345701;alejandro.ruiz07@mailfalso.com;España;12345678;jugador;central;2
+U0003;Daniel;Gómez Torres;2007-05-28;623781214;daniel.gomez@mailfalso.com;España;12345678;jugador;lateral;3
+U0004;Iván;López Sánchez;2007-01-03;634209568;ivan.lopez07@mailfalso.com;España;12345678;jugador;lateral;4
+U0005;Sergio;Morales Díaz;2007-07-19;645874119;sergio.morales07@mailfalso.com;España;12345678;jugador;medio centro;5
+U0006;Pablo;Herrera Cruz;2007-11-09;656193482;pablo.herrera07@mailfalso.com;España;12345678;jugador;medio centro;6
+U0007;Lucas;Navarro Gil;2007-03-21;667560329;lucas.navarro07@mailfalso.com;España;12345678;jugador;extremo;7
+U0008;Álvaro;Romero Vega;2007-09-16;678742905;alvaro.romero07@mailfalso.com;España;12345678;jugador;extremo;8
+U0009;Mario;Castillo Blanco;2007-06-04;689381672;mario.castillo07@mailfalso.com;España;12345678;jugador;media punta;9
+U0010;Hugo;Fernández Ríos;2007-10-30;611908451;hugo.fernandez07@mailfalso.com;España;12345678;jugador;media punta;10
+U0011;Adrián;Molina Pardo;2007-12-12;621347897;adrian.molina07@mailfalso.com;España;12345678;jugador;delantero;11
+U0012;Diego;Ortega Salas;2007-04-25;632918308;diegan.ortega07@mailfalso.com;España;12345678;jugador;delantero;12
+U0013;Javier;Campos León;2007-08-08;643502774;javian.campos07@mailfalso.com;España;12345678;jugador;delantero;13
+U0014;Rubén;Fuentes Rey;2007-01-17;654120993;ruban.fuentes07@mailfalso.com;España;12345678;jugador;central;14
+U0015;Marcos;Vidal Nieto;2007-06-22;665784219;marcan.vidal07@mailfalso.com;España;12345678;jugador;lateral;15
+U0016;Samuel;Peña Lozano;2007-09-05;676435681;samuan.peña07@mailfalso.com;España;12345678;jugador;medio centro;16
+U0017;Leo;Domínguez Arias;2010-02-11;687210540;lan.domínguez10@mailfalso.com;España;12345678;jugador;portero;1
+U0018;Eric;Ramos Prieto;2010-04-29;698901337;eran.ramos10@mailfalso.com;España;12345678;jugador;central;2
+U0019;Bruno;Suárez Méndez;2010-07-07;610456982;bruan.suárez10@mailfalso.com;España;12345678;jugador;lateral;3
+U0020;Thiago;Cordero Gil;2010-01-18;620789117;thiaan.cordero10@mailfalso.com;Brasil;12345678;jugador;lateral;4
+U0021;Gael;Aguilar Cano;2010-09-23;631234654;gaan.aguilar10@mailfalso.com;España;12345678;jugador;medio centro;5
+U0022;Iker;Pastor Molina;2010-05-14;643890326;ikan.pastor10@mailfalso.com;España;12345678;jugador;medio centro;6
+U0023;Enzo;Núñez Serra;2010-03-01;653471883;enan.núñez10@mailfalso.com;Italia;12345678;jugador;extremo;7
+U0024;Nil;Beltrán Roca;2010-06-27;664318559;nan.beltrán10@mailfalso.com;España;12345678;jugador;extremo;8
+U0025;Pol;Esteban Cruz;2010-10-10;675902181;pan.esteban10@mailfalso.com;España;12345678;jugador;media punta;9
+U0026;Unai;Muñoz Vidal;2010-12-01;686540778;unan.muñoz10@mailfalso.com;España;12345678;jugador;media punta;10
+U0027;Álex;Ferrer Soler;2010-08-19;697114237;álan.ferrer10@mailfalso.com;España;12345678;jugador;delantero;11
+U0028;Joel;Iglesias;2010-11-06;609783949;joan.iglesias10@mailfalso.com;España;12345678;jugador;delantero;12
+U0029;Rayan;Ponce Marín;2010-02-15;619345603;rayan.ponce10@mailfalso.com;España;12345678;jugador;delantero;13
+U0030;Noah;Carrasco Peña;2010-05-28;629871395;noan.carrasco10@mailfalso.com;España;12345678;jugador;central;14
+U0031;Mateo;Cabrera Soto;2010-09-09;638456210;matan.cabrera10@mailfalso.com;España;12345678;jugador;lateral;15
+U0032;Antonio;Sánchez Tálvez;1997-03-01;645789126;antonio.sanchez87@mailfalso.com;España;12345678;entrenador;;
+U0033;Michael;Finn;1993-08-07;614755447;michael.finn93@mailfalso.com;Inglaterra;12345678;entrenador;;
+U0034;Ronaldo;Nazariño Viño;1988-06-25;635715948;ronaldo.nazariño88@mailfalso.com;Brasil;12345678;entrenador;;
+U0035;Jaime;Gutiérrez Prim;1975-03-31;694318756;jaime.gutierrez75@mailfalso.com;España;12345678;entrenador;;
+U0036;Emilio;Zamora Gordillo;1965-10-10;615487235;emilio.zamora65@mailfalso.com;España;12345678;director deportivo;;

@@ -9,7 +9,7 @@ const userSchema = new Schema(
     phone: { type: String, trim: true },
     email: { type: String, required: true, trim: true, unique: true },
     nationality: { type: String },
-    username: { type: String, required: true, trim: true, unique: true },
+    //username: { type: String, required: true, trim: true, unique: true },
     password: { type: String, required: true, minlength: [8, "Password 8 caracter minimun"] },
     role: {
       type: String,
@@ -27,9 +27,11 @@ const userSchema = new Schema(
         "extremo",
         "media punta",
         "delantero",
+        ""
       ],
     },
     dorsal: {type: Number},
+    userCode: { type: String, unique: true }
     //team: {type: mongoose.Types.ObjectId, ref: 'teams' },
   },
   {

@@ -1,0 +1,5 @@
+﻿_id;team;rival;date;home;jornada;championship
+M01;T01;Adarve;2025-09-25;true;1;liga
+M02;T02;Concepción;2025-09-26;false;1;liga
+M03;T01;Real Madrid;2025-10-02;false;;amistoso
+M04;T02;Alcobendas;2025-10-01;true;;copa
