@@ -16,7 +16,7 @@ const seed = async () => {
 
     const usersMap = await seedUsers();
     const teamsMap = await seedTeams(usersMap);
-    //const matchesMap = await seedMatches(teamsMap);
+    const matchesMap = await seedMatches(teamsMap);
     //await seedStats(matchesMap, usersMap);
 
     console.log("Seed cargada con éxito.");

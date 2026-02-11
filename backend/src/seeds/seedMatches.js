@@ -2,22 +2,34 @@ import fs from "fs";
 import csv from "csv-parser";
 import Match from "../api/models/match.js";
 
+const parseDate = (value) => {
+  if (!value) return null;
+
+  const [day, month, year] = value.split("/");
+  return new Date(`${year}-${month}-${day}`);
+};
+
 export const seedMatches = async (teamsMap) => {
   const matchesMap = new Map();
   const matches = [];
 
   return new Promise((resolve) => {
     fs.createReadStream("./src/seeds/matches.csv")
-      .pipe(csv({ separator: ";" }))
+      .pipe(
+        csv({
+          separator: ";",
+          mapHeaders: ({ header }) => header.trim().replace(/^\uFEFF/, ""),
+        }),
+      )
       .on("data", (row) => {
         matches.push({
           team: teamsMap.get(row.team),
           rival: row.rival,
-          date: new Date(row.date),
+          date: parseDate(row.date),
           home: row.home,
           jornada: row.jornada,
           championship: row.championship,
-          stats: []
+          stats: [],
         });
         matchesMap.set(row.id, null);
       })
