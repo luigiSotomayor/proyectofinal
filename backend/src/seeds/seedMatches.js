@@ -1,13 +1,7 @@
 import fs from "fs";
 import csv from "csv-parser";
 import Match from "../api/models/match.js";
-
-const parseDate = (value) => {
-  if (!value) return null;
-
-  const [day, month, year] = value.split("/");
-  return new Date(`${year}-${month}-${day}`);
-};
+import { parseDate } from "../utils/parseDate.js";
 
 export const seedMatches = async (teamsMap) => {
   const matchesMap = new Map();

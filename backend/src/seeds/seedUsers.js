@@ -1,13 +1,7 @@
 import fs from "fs";
 import csv from "csv-parser";
 import User from "../api/models/user.js";
-
-const parseDate = (value) => {
-  if (!value) return null;
-
-  const [day, month, year] = value.split("/");
-  return new Date(`${year}-${month}-${day}`);
-};
+import { parseDate } from "../utils/parseDate.js";
 
 export const seedUsers = async () => {
   const usersMap = new Map();
@@ -40,10 +34,16 @@ export const seedUsers = async () => {
       .on("end", async () => {
         
         try {
-          const createdUsers = await User.insertMany(users);
+          for (const u of users) {
+            const user = new User(u);
+            await user.save(); // dispara pre-save hook y encripta password
+            usersMap.set(user.userCode, user._id); // llenamos el map para usar en otras seeds
+          }
+
+          /* const createdUsers = await User.insertMany(users);
           createdUsers.forEach((user) => {
             usersMap.set(user.userCode, user._id);
-          });
+          }); */
           resolve(usersMap);
         } catch (err) {
           reject(err);
