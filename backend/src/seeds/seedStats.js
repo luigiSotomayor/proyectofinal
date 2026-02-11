@@ -10,9 +10,14 @@ export const seedStats = async (matchesMap, usersMap) => {
     const statsPath = path.resolve("./src/seeds/stats.csv");
 
     fs.createReadStream(statsPath)
-      .pipe(csv({ separator: ";" }))
+      .pipe(
+        csv({
+          separator: ";",
+          mapHeaders: ({ header }) => header.trim().replace(/^\uFEFF/, ""),
+        }),
+      )
       .on("data", (row) => {
-        const mongoMatchId = matchesMap.get(row.matchId);
+        const mongoMatchId = matchesMap.get(row.match);
         const playerId = usersMap.get(row.player);
 
         if (!mongoMatchId || !playerId) return;
@@ -21,7 +26,7 @@ export const seedStats = async (matchesMap, usersMap) => {
           statsByMatch[row.match] = [];
         }
 
-        statsByMatch[row.matchId].push({
+        statsByMatch[row.match].push({
           player: playerId,
           minutes: Number(row.minutes),
           titular: Boolean(row.titular),
@@ -30,20 +35,30 @@ export const seedStats = async (matchesMap, usersMap) => {
           redCards: Boolean(row.redCards),
           goalsScored: Number(row.goalsScored),
           goalsConceded: Number(row.goalsConceded),
-          rating: Number(row.rating)
+          rating: Number(row.rating),
         });
       })
       .on("error", (err) => {
         reject(err);
       })
+
       .on("end", async () => {
         try {
-          // Actualizamos cada partido en la DB con sus stats
           for (const csvMatchId of Object.keys(statsByMatch)) {
             const mongoMatchId = matchesMap.get(csvMatchId);
 
-            await Match.findByIdAndUpdate(mongoMatchId, { $set: { stats: statsByMatch[csvMatchId] } });
+            if (!mongoMatchId) {
+              console.warn(
+                `No se encontró matchId en matchesMap: ${csvMatchId}`,
+              );
+              continue;
+            }
+
+            await Match.findByIdAndUpdate(mongoMatchId, {
+              $set: { stats: statsByMatch[csvMatchId] },
+            });
           }
+
           console.log("Seed de stats cargada con éxito.");
           resolve();
         } catch (err) {

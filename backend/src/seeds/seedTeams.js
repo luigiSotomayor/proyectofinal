@@ -15,9 +15,6 @@ export const seedTeams = async (usersMap) => {
         }),
       )
       .on("data", (row) => {
-        //console.log("row: ", row);
-        /*  const playersIds = row.players.split(",").map((_id)=>usersMap.get(_id));
-        console.log("playersIds: ", playersIds); */
         teams.push({
           teamCode: row.teamCode,
           name: row.name,
@@ -27,7 +24,6 @@ export const seedTeams = async (usersMap) => {
             .map((_id) => usersMap.get(_id)),
           coach: usersMap.get(row.coach)
         });
-        //console.log("teams: ", teams);
         teamsMap.set(row.id, null);
       })
       .on("end", async () => {

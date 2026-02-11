@@ -2,8 +2,6 @@ import fs from "fs";
 import csv from "csv-parser";
 import User from "../api/models/user.js";
 
-//console.log("(model) USER SCHEMA PATHS:", Object.keys(User.schema.paths));
-
 const parseDate = (value) => {
   if (!value) return null;
 
@@ -24,9 +22,6 @@ export const seedUsers = async () => {
         }),
       )
       .on("data", (row) => {
-        //console.log(Object.keys(row));
-
-        //console.log("row: ", row);
         const user = {
           userCode: row.userCode,
           firstName: row.firstName,
@@ -41,7 +36,6 @@ export const seedUsers = async () => {
           dorsal: row.dorsal,
         };
         users.push(user);
-        //usersMap.set(row.id, null);
       })
       .on("end", async () => {
         
@@ -50,7 +44,6 @@ export const seedUsers = async () => {
           createdUsers.forEach((user) => {
             usersMap.set(user.userCode, user._id);
           });
-          //console.log("usersMap: ", usersMap);
           resolve(usersMap);
         } catch (err) {
           reject(err);

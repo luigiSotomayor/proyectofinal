@@ -9,6 +9,7 @@ const matchSchema = new Schema({
     championship: {type: String, enum: ["amistoso", "liga", "copa"], required: true},
     stats: [
         {
+            csvId: {type: String},
             player: {type:  Schema.Types.ObjectId, ref: "users"},
             minutes: {type: Number},
             titular: {type: Boolean},

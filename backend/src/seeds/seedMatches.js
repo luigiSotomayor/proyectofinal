@@ -23,6 +23,7 @@ export const seedMatches = async (teamsMap) => {
       )
       .on("data", (row) => {
         matches.push({
+          csvId: row._id,
           team: teamsMap.get(row.team),
           rival: row.rival,
           date: parseDate(row.date),
@@ -31,17 +32,14 @@ export const seedMatches = async (teamsMap) => {
           championship: row.championship,
           stats: [],
         });
-        matchesMap.set(row.id, null);
       })
       .on("end", async () => {
         const created = await Match.insertMany(matches);
 
-        let i = 0;
-        for (const key of matchesMap.keys()) {
-          matchesMap.set(key, created[i]._id);
-          i++;
-        }
-
+        created.forEach((match, index) => {
+          const csvId = matches[index].csvId;
+          matchesMap.set(csvId, match._id);
+        });
         resolve(matchesMap);
       });
   });
