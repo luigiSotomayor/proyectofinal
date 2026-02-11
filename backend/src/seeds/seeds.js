@@ -15,7 +15,7 @@ const seed = async () => {
     console.log("Base de datos borrada.");
 
     const usersMap = await seedUsers();
-    //const teamsMap = await seedTeams(usersMap);
+    const teamsMap = await seedTeams(usersMap);
     //const matchesMap = await seedMatches(teamsMap);
     //await seedStats(matchesMap, usersMap);
 
