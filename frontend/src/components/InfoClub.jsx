@@ -3,7 +3,6 @@ import React from 'react'
 const InfoClub = () => {
   return (
     <div>
-        <h1>Stenella Club de Fútbol</h1>
       <p>
         Stenella CF es un club de fútbol con 25 años de historia arraigado en el
         emblemático barrio de Barrio de Salamanca, en el corazón de Madrid.

@@ -1,8 +1,16 @@
-import React from 'react'
+import React from 'react';
+import {useNavigate} from 'react-router-dom';
 
 const Header = () => {
+    const navigate = useNavigate();
+    const navigateToHome = () => {
+        navigate('/');
+    };
+
   return (
-    <div>Header</div>
+    <header className="header">
+      <h1 onClick={navigateToHome}>Stenella Club de Fútbol</h1>
+    </header>
   )
 }
 
