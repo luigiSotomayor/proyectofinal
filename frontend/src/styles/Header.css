@@ -1,0 +1,62 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background-image: url(/images/fondoHeader.jpg);
+  background-position: 100% 80%;
+  height: 200px;
+  width: 100%;
+}
+
+.logo-container {
+  position: relative;
+  width: 150px;
+  height: 200px;
+}
+
+.logo-container img {
+  position: absolute;
+  top: 15%;
+  left: center;
+  width: 100%;
+  height: auto;
+}
+
+.logo,
+.logo-wrapper {
+  width: 150px;
+  height: auto;
+}
+
+.logo-wrapper{
+  z-index: 2;
+}
+
+.logo {
+  filter: drop-shadow(0px 0px 15px rgba(21, 199, 199, 1)) brightness(2);
+}
+
+.titleHeader {
+  /* color: var(--official-Color-Stenella); */
+  text-shadow:
+    0 0 5px rgb(21, 199, 199),
+    0 0 9px rgb(51, 229, 229),
+    0 0 13px rgb(81, 255, 255),
+    0 0 17px rgb(111, 255, 255);
+  filter: brightness(2);
+}
+
+/* .logo-wrapper {
+  position: relative;
+  display: inline-block;
+} */
+
+/* .logo-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/images/stenellaSinFondo.png") no-repeat center/contain;
+  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.8)) brightness(1.5);
+  z-index: 1;
+} */
