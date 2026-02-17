@@ -19,8 +19,8 @@ const Login = () => {
     console.log("Login con:", { email, password });
 
     // Ejemplo de llamada a backend:
-    /*
-    fetch("/api/login", {
+    
+    fetch("http://localhost:3000/api/v1/user/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -28,7 +28,7 @@ const Login = () => {
       .then(res => res.json())
       .then(data => console.log(data))
       .catch(err => console.error(err));
-    */
+   
   };
 
   return (

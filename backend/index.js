@@ -5,12 +5,18 @@ import matchRouter from "./src/api/routes/match.js";
 import userRouter from "./src/api/routes/user.js";
 import trainingRouter from "./src/api/routes/training.js";
 import teamRouter from "./src/api/routes/team.js";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
 
 connectDB();
+
+app.use(cors({
+  origin: "http://localhost:5174",
+  credentials: true
+}));
 
 app.use(json());   
 

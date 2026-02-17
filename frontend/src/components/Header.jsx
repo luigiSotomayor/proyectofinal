@@ -1,17 +1,23 @@
-import React from 'react';
-import {useNavigate} from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-    const navigate = useNavigate();
-    const navigateToHome = () => {
-        navigate('/');
-    };
+  const navigate = useNavigate();
+  const navigateToHome = () => {
+    navigate("/");
+  };
 
   return (
     <header className="header">
+      <img
+        src="/images/stenellaSinFondo.png"
+        alt="Logo del club"
+        className="logo"
+        onClick={navigateToHome}
+      />
       <h1 onClick={navigateToHome}>Stenella Club de Fútbol</h1>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
