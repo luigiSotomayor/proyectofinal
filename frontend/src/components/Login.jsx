@@ -19,9 +19,9 @@ const Login = () => {
         position: "top-center",
         autoClose: 4000,
         theme: "colored",
-      })
+      });
       setEmail("");
-      setPassword("");  
+      setPassword("");
       return;
     }
 
@@ -40,11 +40,12 @@ const Login = () => {
         if (!res.ok) {
           // Aquí entran los 400, 401, 500, etc.
           if (res.status === 400) {
+            setError("Credenciales incorrectas");
             toast.error("Credenciales incorrectas", {
               position: "top-center",
               autoClose: 4000,
               theme: "colored",
-            })
+            });
             setEmail("");
             setPassword("");
           }
@@ -61,7 +62,7 @@ const Login = () => {
   return (
     <div className="login">
       <form onSubmit={handleSubmit}>
-        <p>Iniciar Sesión</p>
+        <p className="titleLogin">Iniciar Sesión</p>
 
         <input
           type="email"
@@ -77,7 +78,9 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button type="submit" text="Login" onClick={handleSubmit}/>
+        {error && <p className="error-message">{error}</p>}
+
+        <Button type="submit" text="Login" onClick={handleSubmit} />
       </form>
     </div>
   );

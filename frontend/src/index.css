@@ -8,6 +8,9 @@
   background-color: #242424;
 
   --official-Color-Stenella: #2A7F96;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
