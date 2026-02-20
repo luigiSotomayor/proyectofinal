@@ -1,0 +1,8 @@
+.mainHome {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: top;
+    width: 100%;
+    background-color: rgba(49, 212, 230, 0.382);
+} 

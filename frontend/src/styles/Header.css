@@ -21,6 +21,7 @@
   left: center;
   width: 100%;
   height: auto;
+  cursor: pointer;
 }
 
 .logo,
@@ -45,6 +46,7 @@
     0 0 13px rgb(81, 255, 255),
     0 0 17px rgb(111, 255, 255);
   filter: brightness(2);
+  cursor: pointer;
 }
 
 /* .logo-wrapper {

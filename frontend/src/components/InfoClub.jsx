@@ -1,8 +1,9 @@
 import React from 'react'
+import "../styles/InfoClub.css";
 
 const InfoClub = () => {
   return (
-    <div>
+    <div className='infoClub'>
       <p>
         Stenella CF es un club de fútbol con 25 años de historia arraigado en el
         emblemático barrio de Barrio de Salamanca, en el corazón de Madrid.

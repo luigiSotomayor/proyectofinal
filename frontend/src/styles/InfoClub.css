@@ -1,0 +1,8 @@
+.infoClub {
+    flex: 3;
+    padding: 20px 30px;
+    text-align: justify;
+    color: var(--official-Color-Stenella);
+    text-indent: 2rem;
+    /* background-image: url(/images/campo_futbol.jpg); */
+}

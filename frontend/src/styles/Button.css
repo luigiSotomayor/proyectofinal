@@ -1,0 +1,15 @@
+.button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--official-Color-Stenella);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.button:hover {
+  background-color: #334155;
+  transform: scale(1.1);
+}

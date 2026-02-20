@@ -5,7 +5,7 @@ import "../styles/home.css";
 
 const home = () => {
   return (
-    <div className="infoClub">
+    <div className="mainHome">
       <InfoClub />
       <Login />
     </div>

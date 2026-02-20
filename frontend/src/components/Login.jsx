@@ -1,5 +1,9 @@
 import { useState } from "react";
 import React from "react";
+import "../styles/Login.css";
+import { toast } from "react-toastify";
+import Button from "./Button";
+import { set } from "mongoose";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,6 +15,13 @@ const Login = () => {
 
     if (!email || !password) {
       setError("Por favor, completa todos los campos.");
+      toast.error("Por favor, completa todos los campos.", {
+        position: "top-center",
+        autoClose: 4000,
+        theme: "colored",
+      })
+      setEmail("");
+      setPassword("");  
       return;
     }
 
@@ -18,23 +29,39 @@ const Login = () => {
 
     console.log("Login con:", { email, password });
 
-    // Ejemplo de llamada a backend:
-    
     fetch("http://localhost:3000/api/v1/user/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     })
-      .then(res => res.json())
-      .then(data => console.log(data))
-      .catch(err => console.error(err));
-   
+      .then(async (res) => {
+        const data = await res.json();
+
+        if (!res.ok) {
+          // Aquí entran los 400, 401, 500, etc.
+          if (res.status === 400) {
+            toast.error("Credenciales incorrectas", {
+              position: "top-center",
+              autoClose: 4000,
+              theme: "colored",
+            })
+            setEmail("");
+            setPassword("");
+          }
+
+          throw new Error(data.message || "Error en la petición");
+        }
+
+        return data;
+      })
+      .then((data) => console.log(data))
+      .catch((err) => console.error(err));
   };
 
   return (
-    <div>
+    <div className="login">
       <form onSubmit={handleSubmit}>
-        <h2>Iniciar Sesión</h2>
+        <p>Iniciar Sesión</p>
 
         <input
           type="email"
@@ -50,7 +77,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button type="submit">Login</button>
+        <Button type="submit" text="Login" onClick={handleSubmit}/>
       </form>
     </div>
   );
