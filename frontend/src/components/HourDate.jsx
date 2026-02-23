@@ -7,16 +7,22 @@ const HourDate = () => {
   const time = useCurrentTime();
 
   //formateamos la fecha para facilitar su lectura
-  const formattedDate = time.toLocaleTimeString(undefined, {
+  const formattedDate = time.toLocaleDateString(undefined, {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 
+  const formattedTime = time.toLocaleTimeString("es-ES", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
   return (
     <nav className="hourDateDisplay">
       <p>{formattedDate}</p>
+      <p>{formattedTime}</p>
     </nav>
   );
 };

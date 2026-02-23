@@ -1,13 +1,13 @@
-/* .hourDateDisplay {
+.hourDateDisplay {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: rgba(127, 255, 212, 0.3);
   padding: 0px 10px;
   height: 40px;
+  gap: 20px;
 }
-
+/*
 .hourDateDisplay > p {
   transform: translateX(100%);
 }

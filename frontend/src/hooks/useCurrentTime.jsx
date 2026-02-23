@@ -5,7 +5,7 @@ export const useCurrentTime = () => {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
-    const timer = setInterval(() => setTime(new Date()), 1000);
+    const timer = setInterval(() => setTime(new Date()), 60000);
     return () => clearInterval(timer); // limpiar el interval al desmontar
   }, []);
 
