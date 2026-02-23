@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import Button from "./Button";
 import { set } from "mongoose";
 
-const Login = () => {
+const Login = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -36,6 +36,8 @@ const Login = () => {
     })
       .then(async (res) => {
         const data = await res.json();
+        localStorage.setItem("token", data.token);
+
 
         if (!res.ok) {
           // Aquí entran los 400, 401, 500, etc.
@@ -48,10 +50,12 @@ const Login = () => {
             });
             setEmail("");
             setPassword("");
+            setIsAuthenticated(false);
           }
 
           throw new Error(data.message || "Error en la petición");
         }
+        setIsAuthenticated(true);
 
         return data;
       })

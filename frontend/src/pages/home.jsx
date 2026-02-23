@@ -3,11 +3,11 @@ import InfoClub from "../components/InfoClub";
 import Login from "../components/Login";
 import "../styles/home.css";
 
-const home = () => {
+const home = ({ setIsAuthenticated }) => {
   return (
     <div className="mainHome">
       <InfoClub />
-      <Login />
+      <Login setIsAuthenticated={setIsAuthenticated} />
     </div>
   );
 };
