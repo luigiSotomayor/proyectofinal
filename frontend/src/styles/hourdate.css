@@ -1,0 +1,19 @@
+.hourDateDisplay {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(127, 255, 212, 0.3);
+  padding: 0px 10px;
+  height: 40px;
+}
+
+.hourDateDisplay > p {
+  transform: translateX(100%);
+}
+
+@media (max-width: 930px){
+  .hourDateDisplay > p{
+    transform: translateX(0%);
+  }
+}
