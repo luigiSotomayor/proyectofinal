@@ -1,5 +1,5 @@
 import React from "react";
-import { useCurrentTime } from "../hooks/useCurrentTime";
+import { useCurrentTime } from "../hooks/useCurrentTime.jsx";
 import "../styles/hourdate.css";
 
 //componente que nos pone en pantalla la fecha y hora actuales

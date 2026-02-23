@@ -2,7 +2,7 @@ import React from 'react'
 
 const UserSubHeader = () => {
   return (
-    <div>User</div>
+    <div>UserSubHeader</div>
   )
 }
 
