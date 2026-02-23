@@ -3,12 +3,14 @@ import React from "react";
 import "../styles/Login.css";
 import { toast } from "react-toastify";
 import Button from "./Button";
+import { useNavigate } from "react-router-dom";
 import { set } from "mongoose";
 
-const Login = ({ setIsAuthenticated }) => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,12 +52,13 @@ const Login = ({ setIsAuthenticated }) => {
             });
             setEmail("");
             setPassword("");
-            setIsAuthenticated(false);
+            //setIsAuthenticated(false);
           }
 
           throw new Error(data.message || "Error en la petición");
         }
-        setIsAuthenticated(true);
+        //
+        navigate("/infodisplay");
 
         return data;
       })
