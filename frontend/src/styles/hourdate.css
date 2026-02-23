@@ -1,4 +1,4 @@
-.hourDateDisplay {
+/* .hourDateDisplay {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -16,4 +16,4 @@
   .hourDateDisplay > p{
     transform: translateX(0%);
   }
-}
+} */
