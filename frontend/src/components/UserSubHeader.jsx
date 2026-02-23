@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { apiFetch } from "../utils/apiFetch.js";
+//import { capitalize } from "../utils/capitalize.js";
 
 const UserSubHeader = () => {
   const [data, setData] = useState(null);
@@ -25,6 +26,7 @@ const UserSubHeader = () => {
 
     loadData();
   }, []);
+
   return (
     <div className="usersubheader">
       {data?.role}: {data?.firstName} {data?.lastName} 

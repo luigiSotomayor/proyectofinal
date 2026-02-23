@@ -39,7 +39,6 @@ const Login = () => {
 
 
         if (!res.ok) {
-          // Aquí entran los 400, 401, 500, etc.
           if (res.status === 400) {
             setError("Credenciales incorrectas");
             toast.error("Credenciales incorrectas", {
@@ -51,7 +50,6 @@ const Login = () => {
             setPassword("");
             navigate("/");
             return;
-            //setIsAuthenticated(false);
           }
 
           throw new Error(data.message || "Error en la petición");
@@ -62,7 +60,6 @@ const Login = () => {
 
         return data;
       })
-      //.then((data) => console.log(data))
       .catch((err) => console.error(err));
   };
 
