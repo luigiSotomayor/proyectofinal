@@ -29,8 +29,6 @@ const Login = () => {
 
     setError("");
 
-    console.log("Login con:", { email, password });
-
     fetch("http://localhost:3000/api/v1/user/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -38,8 +36,6 @@ const Login = () => {
     })
       .then(async (res) => {
         const data = await res.json();
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("userId", data.user._id);
 
 
         if (!res.ok) {
@@ -53,17 +49,20 @@ const Login = () => {
             });
             setEmail("");
             setPassword("");
+            navigate("/");
+            return;
             //setIsAuthenticated(false);
           }
 
           throw new Error(data.message || "Error en la petición");
         }
-        //
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.user._id);
         navigate("/infodisplay");
 
         return data;
       })
-      .then((data) => console.log(data))
+      //.then((data) => console.log(data))
       .catch((err) => console.error(err));
   };
 

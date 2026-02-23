@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/home.jsx";
 import Footer from "./components/Footer.jsx";
-import InfoDisplay from "./components/InfoDisplay.jsx";
+import InfoDisplay from "./pages/InfoDisplay.jsx";
 import { useState } from "react";
 
 function App() {
