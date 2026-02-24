@@ -4,13 +4,14 @@ import "../styles/Login.css";
 import { toast } from "react-toastify";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
-import { set } from "mongoose";
+import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,8 +55,9 @@ const Login = () => {
 
           throw new Error(data.message || "Error en la petición");
         }
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("userId", data.user._id);
+        //localStorage.setItem("token", data.token);
+        //localStorage.setItem("userId", data.user._id);
+        login(data.user, data.token);
         navigate("/infodisplay");
 
         return data;

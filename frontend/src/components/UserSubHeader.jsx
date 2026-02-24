@@ -1,35 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { apiFetch } from "../utils/apiFetch.js";
-//import { capitalize } from "../utils/capitalize.js";
+import { useAuth } from "../context/AuthContext.jsx";
 
 const UserSubHeader = () => {
   const [data, setData] = useState(null);
-
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const userId = localStorage.getItem("userId");
-        const url = `http://localhost:3000/api/v1/user/${userId}`;
-        const response = await apiFetch(url);
-
-        if (!response.ok) {
-          throw new Error("Error en la petición");
-        }
-
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    loadData();
-  }, []);
+  const { user } = useAuth();
 
   return (
     <div className="usersubheader">
-      {data?.role}: {data?.firstName} {data?.lastName} 
+      {user.role}: {user.firstName} {user.lastName} 
     </div>
   );
 };
