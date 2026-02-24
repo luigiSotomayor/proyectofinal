@@ -1,7 +1,7 @@
 import React from "react";
-import SubHeader from "../components/SubHeader";
-import Menu from "../components/Menu";
-import InfoUser from "../components/InfoUser";
+import SubHeader from "../components/SubHeader.jsx";
+import Menu from "../components/Menu.jsx";
+import InfoData from "../components/InfoData.jsx";
 import "../styles/infodisplay.css";
 
 const InfoDisplay = () => {
@@ -10,7 +10,7 @@ const InfoDisplay = () => {
       <SubHeader />
       <section className="main-infodisplay">
         <Menu />
-        <InfoUser />
+        <InfoData />
       </section>
     </div>
   );
