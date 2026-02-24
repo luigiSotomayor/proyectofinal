@@ -2,6 +2,7 @@ import React from "react";
 import SubHeader from "../components/SubHeader";
 import Menu from "../components/Menu";
 import InfoUser from "../components/InfoUser";
+import "../styles/infodisplay.css";
 
 const InfoDisplay = () => {
   return (
