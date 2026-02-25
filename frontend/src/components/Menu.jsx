@@ -14,9 +14,13 @@ const Menu = () => {
   useEffect(() => {
     const loadMatches = async () => {
       try {
-        const teamReq = await apiFetch(`http://localhost:3000/api/v1/team/team/${user._id}`);
+        const teamReq = await apiFetch(
+          `http://localhost:3000/api/v1/team/team/${user._id}`,
+        );
         setTeamOfPlayer(teamReq);
-        const matchesReq = await apiFetch(`http://localhost:3000/api/v1/match/team/${teamReq._id}`);
+        const matchesReq = await apiFetch(
+          `http://localhost:3000/api/v1/match/team/${teamReq._id}`,
+        );
         setMatches(matchesReq);
       } catch (error) {
         console.error(error);
@@ -30,6 +34,16 @@ const Menu = () => {
     e.preventDefault();
     logout();
     navigate("/");
+  };
+
+  const formatDate = (date) => {
+    const d = new Date(date);
+
+    const day = String(d.getDate()).padStart(2, "0");
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const year = String(d.getFullYear()).slice(-2);
+
+    return `${day}/${month}/${year}`;
   };
 
   return (
@@ -49,7 +63,18 @@ const Menu = () => {
       )}
       {user.role === "jugador" && (
         <section className="partidos">
-          <h2>{matches.length} partidos</h2>
+          <h3>{teamOfPlayer.name}</h3>
+          <ul>
+            {matches.map((match) => (
+              <li
+                key={match._id}
+                onClick={() => setSelectedMatch(match)}
+                className="match-item"
+              >
+                {match.rival} - {formatDate(match.date)}
+              </li>
+            ))}
+          </ul>
         </section>
       )}
     </div>
