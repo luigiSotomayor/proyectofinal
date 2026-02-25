@@ -10,7 +10,7 @@ const InfoDisplay = () => {
       <SubHeader />
       <section className="main-infodisplay">
         <Menu />
-        <InfoData />
+        <InfoData comp="usuario"/>
       </section>
     </div>
   );

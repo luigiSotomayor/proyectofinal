@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { apiFetch } from "../utils/apiFetch.js";
 import "../styles/Menu.css";
+import { formatDate } from "../utils/formatDate.js";
 
 const Menu = () => {
   const { logout, user } = useAuth();
@@ -37,16 +38,6 @@ const Menu = () => {
     navigate("/");
   };
 
-  const formatDate = (date) => {
-    const d = new Date(date);
-
-    const day = String(d.getDate()).padStart(2, "0");
-    const month = String(d.getMonth() + 1).padStart(2, "0");
-    const year = String(d.getFullYear()).slice(-2);
-
-    return `${day}/${month}/${year}`;
-  };
-
   return (
     <div className="menu">
       <section className="logout">
@@ -54,12 +45,15 @@ const Menu = () => {
       </section>
       {user.role === "director deportivo" && (
         <section className="usuarios">
-          <h2>Usuarios</h2>
+          <h2>Gestión de usuarios</h2>
+          <h2>Gestión de equipos</h2>
+          <h2>Gestión de partidos</h2>
         </section>
       )}
-      {user.role === "director deportivo" && (
+      {user.role === "entrenador" && (
         <section className="equipos">
-          <h2>Equipos</h2>
+          <h2>crear partido</h2>
+          <h2>Equipos con partidos</h2>
         </section>
       )}
       {user.role === "jugador" && (

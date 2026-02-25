@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+import InfoUser from "./InfoUser.jsx";
 
-const InfoData = () => {
+const InfoData = ({ comp }) => {
   return (
-    <div>InfoData</div>
-  )
-}
+    <div>
+      {comp === "usuario" && (
+        <div>
+          <InfoUser />
+        </div>
+      )}
+    </div>
+  );
+};
 
-export default InfoData
+export default InfoData;
