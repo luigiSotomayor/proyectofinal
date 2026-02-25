@@ -22,9 +22,9 @@ export const seedTeams = async (usersMap) => {
             .split(",")
             .map((playerCode) => playerCode.trim())
             .map((_id) => usersMap.get(_id)),
-          coach: usersMap.get(row.coach)
+          coach: usersMap.get(row.coach),
         });
-        teamsMap.set(row.id, null);
+        teamsMap.set(row.teamCode, null);
       })
       .on("end", async () => {
         const created = await Team.insertMany(teams);
@@ -34,7 +34,8 @@ export const seedTeams = async (usersMap) => {
           teamsMap.set(key, created[i]._id);
           i++;
         }
-
+        console.log("CLAVES REALES DEL teamsMap:");
+        console.log([...teamsMap.keys()]);
         resolve(teamsMap);
       });
   });
