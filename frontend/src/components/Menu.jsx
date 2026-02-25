@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { apiFetch } from "../utils/apiFetch.js";
+import "../styles/Menu.css";
 
 const Menu = () => {
   const { logout, user } = useAuth();
@@ -64,11 +65,11 @@ const Menu = () => {
       {user.role === "jugador" && (
         <section className="partidos">
           <h3>{teamOfPlayer.name}</h3>
-          <ul>
+          <ul className="matches-list">
             {matches.map((match) => (
               <li
                 key={match._id}
-                onClick={() => setSelectedMatch(match)}
+                onClick={() => setSelectedMatch(match._id)}
                 className="match-item"
               >
                 {match.rival} - {formatDate(match.date)}

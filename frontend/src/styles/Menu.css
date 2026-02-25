@@ -1,0 +1,16 @@
+.matches-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.match-item {
+    cursor: pointer;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.match-item:hover {
+    background-color: var(--official-Color-Stenella);
+    color: whitesmoke;
+}
