@@ -14,3 +14,13 @@
     background-color: var(--official-Color-Stenella);
     color: whitesmoke;
 }
+
+.ulist-menu {
+    list-style: none;
+    padding: 5px 10px;
+    margin: 5px;
+}
+
+.opciones h4{
+    margin: 3px 0;
+}

@@ -11,10 +11,12 @@ const InfoUser = () => {
   useEffect(() => {
     const loadTeam = async () => {
       try {
-        const teamReq = await apiFetch(
-          `http://localhost:3000/api/v1/team/team/${user._id}`,
-        );
-        setTeamOfPlayer(teamReq);
+        if (user?.role === "jugador") {
+          const teamReq = await apiFetch(
+            `http://localhost:3000/api/v1/team/team/${user._id}`,
+          );
+          setTeamOfPlayer(teamReq);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -30,10 +32,16 @@ const InfoUser = () => {
       <h1>
         {user?.firstName} {user?.lastName}
       </h1>
-      <h4>Equipo: {teamOfPlayer.name}</h4>
-      <h4>
-        Posición: {user?.position} Dorsal: {user?.dorsal}
-      </h4>
+      {user?.role === "jugador" && (
+        <>
+          <h4>Equipo: {teamOfPlayer.name}</h4>
+          <h4>
+            Posición: {user?.position} Dorsal: {user?.dorsal}
+          </h4>
+        </>
+      )}
+      {user?.role === "entrenador" && <h4>Puesto: Entrenador</h4>}
+      {user?.role === "director deportivo" && <h4>Puesto: Director Deportivo</h4>}
       <h4>Fecha nacimiento: {formatDate(user?.birthday)}</h4>
       <h4>Teléfono: {user?.phone}</h4>
       <h4>Email: {user?.email}</h4>

@@ -16,6 +16,7 @@ const Menu = () => {
   useEffect(() => {
     const loadMatches = async () => {
       try {
+        if (user?.role === "jugador") {
         const teamReq = await apiFetch(
           `http://localhost:3000/api/v1/team/team/${user._id}`,
         );
@@ -23,7 +24,7 @@ const Menu = () => {
         const matchesReq = await apiFetch(
           `http://localhost:3000/api/v1/match/team/${teamReq._id}`,
         );
-        setMatches(matchesReq);
+        setMatches(matchesReq);}
       } catch (error) {
         console.error(error);
       }
@@ -44,10 +45,25 @@ const Menu = () => {
         <Button type="button" text="Logout" onClick={handleSubmit} />
       </section>
       {user.role === "director deportivo" && (
-        <section className="usuarios">
-          <h2>Gestión de usuarios</h2>
-          <h2>Gestión de equipos</h2>
-          <h2>Gestión de partidos</h2>
+        <section className="opciones">
+          <h4>Gestión de usuarios</h4>
+          <ul className="gestion-usuarios ulist-menu">
+            <li>Altas</li>
+            <li>Bajas</li>
+            <li>Editar usuario</li>
+          </ul>
+          <h4>Gestión de equipos</h4>
+          <ul className="gestion-equipos ulist-menu">
+            <li>Altas</li>
+            <li>Bajas</li>
+            <li>Editar usuario</li>
+          </ul>
+          <h4>Partidos</h4>
+          <ul className="gestion-partidos ulist-menu">
+            <li>Altas</li>
+            <li>Bajas</li>
+            <li>Editar usuario</li>
+          </ul>
         </section>
       )}
       {user.role === "entrenador" && (
