@@ -1,7 +1,7 @@
 .menu {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     padding: 20px;
     background-color: rgba(127, 255, 212, 0.3);
 }
@@ -23,6 +23,12 @@
     color: whitesmoke;
 }
 
+.itemHover:hover {
+    cursor: pointer;
+    background-color: var(--official-Color-Stenella);
+    color: whitesmoke;
+}
+
 .ulist-menu {
     list-style: none;
     padding: 5px 10px;
@@ -34,5 +40,49 @@
 }
 
 .logout {
-    margin: auto;
+    margin: 10px auto;
+}
+
+.addMatch:hover {
+    background-color: var(--official-Color-Stenella);
+    color: whitesmoke;
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 8px;
+}
+
+.matches-list {
+    margin: 6px 5px 6px 15px;
+}
+
+.list-teamMister {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.equipos h3{
+    margin: 7px 10px
+}
+
+.teams {
+    cursor: pointer;
+    list-style: none;
+}
+
+.teams:hover {
+    background-color: var(--official-Color-Stenella);
+    color: whitesmoke;
+    padding: 7px 10px;
+    border-radius: 8px;
+}
+
+.matchByTeam:hover {
+    background-color: var(--official-Color-Stenella);
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.submenu {
+    list-style: none;
 }

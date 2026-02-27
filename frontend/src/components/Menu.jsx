@@ -10,27 +10,43 @@ const Menu = () => {
   const { logout, user } = useAuth();
   const navigate = useNavigate();
   const [teamOfPlayer, setTeamOfPlayer] = useState({});
+  const [teamMister, setTeamMister] = useState([{}]);
   const [matchesTeam, setMatchesTeam] = useState([]);
   const [allMatches, setAllMatches] = useState([]);
   const [selectedMatch, setSelectedMatch] = useState(null);
+  const [openId, setOpenId] = useState(null);
 
   useEffect(() => {
     const loadMatches = async () => {
       try {
-        const allMatchesReq = await apiFetch(
-          `http://localhost:3000/api/v1/match`,
-        );
-        setAllMatches(allMatchesReq);
+        if (user?.role === "director deportivo") {
+          const allMatchesReq = await apiFetch(
+            `http://localhost:3000/api/v1/match`,
+          );
+          setAllMatches(allMatchesReq);
+        }
+
+        if (user?.role === "entrenador") {
+          const teamMisterReq = await apiFetch(
+            `http://localhost:3000/api/v1/team/coach/${user._id}`,
+          );
+          setTeamMister(teamMisterReq);
+          const matchesTeamMisterReq = await apiFetch(
+            `http://localhost:3000/api/v1/match/team/${teamMisterReq[0]._id}`,
+          );
+          setMatchesTeam(matchesTeamMisterReq);
+        }
 
         if (user?.role === "jugador") {
-        const teamReq = await apiFetch(
-          `http://localhost:3000/api/v1/team/team/${user._id}`,
-        );
-        setTeamOfPlayer(teamReq);
-        const matchesTeamReq = await apiFetch(
-          `http://localhost:3000/api/v1/match/team/${teamReq._id}`,
-        );
-        setMatchesTeam(matchesTeamReq);}
+          const teamReq = await apiFetch(
+            `http://localhost:3000/api/v1/team/user/${user._id}`,
+          );
+          setTeamOfPlayer(teamReq);
+          const matchesTeamReq = await apiFetch(
+            `http://localhost:3000/api/v1/match/team/${teamReq._id}`,
+          );
+          setMatchesTeam(matchesTeamReq);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -45,6 +61,10 @@ const Menu = () => {
     navigate("/");
   };
 
+  const toggleItem = (id) => {
+    setOpenId(openId === id ? null : id);
+  };
+
   return (
     <div className="menu">
       <section className="logout">
@@ -54,15 +74,15 @@ const Menu = () => {
         <section className="opciones">
           <h4>Gestión de usuarios</h4>
           <ul className="gestion-usuarios ulist-menu">
-            <li>Altas</li>
-            <li>Bajas</li>
-            <li>Editar usuario</li>
+            <li className="itemHover">Altas</li>
+            <li className="itemHover">Bajas</li>
+            <li className="itemHover">Editar usuario</li>
           </ul>
           <h4>Gestión de equipos</h4>
           <ul className="gestion-equipos ulist-menu">
-            <li>Altas</li>
-            <li>Bajas</li>
-            <li>Editar usuario</li>
+            <li className="itemHover">Altas</li>
+            <li className="itemHover">Bajas</li>
+            <li className="itemHover">Editar usuario</li>
           </ul>
           <h4>Partidos</h4>
           <ul className="matches-list">
@@ -70,7 +90,7 @@ const Menu = () => {
               <li
                 key={match._id}
                 onClick={() => setSelectedMatch(match._id)}
-                className="match-item"
+                className="match-item itemHover"
               >
                 {match.team.name} - {formatDate(match.date)}
               </li>
@@ -80,8 +100,26 @@ const Menu = () => {
       )}
       {user.role === "entrenador" && (
         <section className="equipos">
-          <h2>crear partido</h2>
-          <h2>Equipos con partidos</h2>
+          <h3 className="addMatch">Añadir partido</h3>
+          <h3>Partidos</h3>
+          {teamMister.map((team) => (
+            <ul key={team._id} className="list-teamMister">
+              <li className="teams" onClick={() => toggleItem(team._id)}>
+                {team.name}
+              </li>
+              {openId === team._id && (
+                <ul className="submenu">
+                  {matchesTeam
+                    .filter((match) => match.team._id === team._id)
+                    .map((match) => (
+                      <li className="matchByTeam" key={match._id}>
+                        {match.rival} - {formatDate(match.date)}
+                      </li>
+                    ))}
+                </ul>
+              )}
+            </ul>
+          ))}
         </section>
       )}
       {user.role === "jugador" && (

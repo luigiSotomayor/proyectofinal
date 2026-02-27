@@ -38,6 +38,24 @@ const getTeamByUserId = async (req, res, next) => {
   }
 };
 
+const getTeamByCoachId = async (req, res, next) => {
+  try {
+    const { coachId } = req.params;
+    const teams = await Team.find({ coach: coachId })
+      .populate("coach"); 
+      if (!teams) {
+      return res.status(404).json("Ningún equipo encontrado para este entrenador");
+    }
+    /* const teamsToReturn = [{
+      _id: teams._id,
+      name: teams.name,
+    }]; */
+    return res.status(200).json(teams);
+  } catch (error) {
+    return res.status(400).json("Error al obtener los equipos por id de entrenador");
+  }
+};
+
 const postTeam = async (req, res, next) => {
   try {
     const newTeam = new Team(req.body);
@@ -74,4 +92,4 @@ const deleteTeam = async (req, res, next) => {
   }
 };
 
-export { getTeams, getTeam, getTeamByUserId, postTeam, updateTeam, deleteTeam };
+export { getTeams, getTeam, getTeamByUserId, getTeamByCoachId, postTeam, updateTeam, deleteTeam };

@@ -8,8 +8,8 @@
   background-color: #242424;
 
   --official-Color-Stenella: #2A7F96;
-  padding: 0;
-  margin: 0;
+  padding: 0px;
+  margin: 0px;
   box-sizing: border-box;
 
   font-synthesis: none;
@@ -65,9 +65,9 @@ button:focus-visible {
     background-color: #ffffff;
     max-width: 1000px;
     margin: 0 auto;
-  }
+  }/* 
   a:hover {
-    color: #747bff;
+    color: #747bff; */
   }
   button {
     background-color: #f9f9f9;
