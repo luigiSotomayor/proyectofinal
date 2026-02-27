@@ -15,6 +15,7 @@ const Menu = () => {
   const [allMatches, setAllMatches] = useState([]);
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [openId, setOpenId] = useState(null);
+  const [allTeams, setAllTeams] = useState([]);
 
   useEffect(() => {
     const loadMatches = async () => {
@@ -24,6 +25,11 @@ const Menu = () => {
             `http://localhost:3000/api/v1/match`,
           );
           setAllMatches(allMatchesReq);
+          const allTeamsReq = await apiFetch(
+            `http://localhost:3000/api/v1/team`,
+          );
+          console.log(allTeamsReq);
+          setAllTeams(allTeamsReq);
         }
 
         if (user?.role === "entrenador") {
