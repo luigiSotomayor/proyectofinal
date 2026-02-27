@@ -1,3 +1,11 @@
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(127, 255, 212, 0.3);
+}
+
 .matches-list {
     list-style: none;
     padding: 0;
@@ -23,4 +31,8 @@
 
 .opciones h4{
     margin: 3px 0;
+}
+
+.logout {
+    margin: auto;
 }

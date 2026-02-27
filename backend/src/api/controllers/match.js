@@ -2,7 +2,7 @@ import Match from "../models/match.js";
 
 const getMatches = async (req, res, next) => {
   try {
-    const matches = await Match.find();
+    const matches = await Match.find().populate("team", "name");
     return res.status(200).json(matches);
   } catch (error) {
     return res.status(400).json("Error al obtener los partidos");

@@ -10,21 +10,27 @@ const Menu = () => {
   const { logout, user } = useAuth();
   const navigate = useNavigate();
   const [teamOfPlayer, setTeamOfPlayer] = useState({});
-  const [matches, setMatches] = useState([]);
+  const [matchesTeam, setMatchesTeam] = useState([]);
+  const [allMatches, setAllMatches] = useState([]);
   const [selectedMatch, setSelectedMatch] = useState(null);
 
   useEffect(() => {
     const loadMatches = async () => {
       try {
+        const allMatchesReq = await apiFetch(
+          `http://localhost:3000/api/v1/match`,
+        );
+        setAllMatches(allMatchesReq);
+
         if (user?.role === "jugador") {
         const teamReq = await apiFetch(
           `http://localhost:3000/api/v1/team/team/${user._id}`,
         );
         setTeamOfPlayer(teamReq);
-        const matchesReq = await apiFetch(
+        const matchesTeamReq = await apiFetch(
           `http://localhost:3000/api/v1/match/team/${teamReq._id}`,
         );
-        setMatches(matchesReq);}
+        setMatchesTeam(matchesTeamReq);}
       } catch (error) {
         console.error(error);
       }
@@ -59,10 +65,16 @@ const Menu = () => {
             <li>Editar usuario</li>
           </ul>
           <h4>Partidos</h4>
-          <ul className="gestion-partidos ulist-menu">
-            <li>Altas</li>
-            <li>Bajas</li>
-            <li>Editar usuario</li>
+          <ul className="matches-list">
+            {allMatches.map((match) => (
+              <li
+                key={match._id}
+                onClick={() => setSelectedMatch(match._id)}
+                className="match-item"
+              >
+                {match.team.name} - {formatDate(match.date)}
+              </li>
+            ))}
           </ul>
         </section>
       )}
@@ -76,7 +88,7 @@ const Menu = () => {
         <section className="partidos">
           <h3>{teamOfPlayer.name}</h3>
           <ul className="matches-list">
-            {matches.map((match) => (
+            {matchesTeam.map((match) => (
               <li
                 key={match._id}
                 onClick={() => setSelectedMatch(match._id)}
