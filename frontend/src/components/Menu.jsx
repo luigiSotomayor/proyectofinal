@@ -89,12 +89,7 @@ const Menu = ({ setMode }) => {
         <section className="opciones">
           <h3>Gestión de usuarios</h3>
           <ul className="gestion-usuarios ulist-menu">
-            <li
-              className="itemHover"
-              onClick={() => setMode("usercreate")}
-            >
-              Altas
-            </li>
+            <li className="itemHover" onClick={() => setMode("usercreate")}>Altas</li>
             <li className="itemHover" onClick={() => setMode("userdelete")}>Bajas</li>
             <li className="itemHover" onClick={() => setMode("useredit")}>Editar usuario</li>
           </ul>
