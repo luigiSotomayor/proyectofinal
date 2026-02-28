@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { apiFetch } from "../utils/apiFetch.js";
 import "../styles/Menu.css";
 import { formatDate } from "../utils/formatDate.js";
+import SlimSelect from "slim-select";
 
 const Menu = () => {
   const { logout, user } = useAuth();
@@ -16,6 +17,10 @@ const Menu = () => {
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [openId, setOpenId] = useState(null);
   const [allTeams, setAllTeams] = useState([]);
+
+  new SlimSelect({
+    select: "#selectElement",
+  });
 
   useEffect(() => {
     const loadMatches = async () => {
@@ -109,22 +114,17 @@ const Menu = () => {
           <h3 className="addMatch">Añadir partido</h3>
           <h3>Partidos</h3>
           {teamMister.map((team) => (
-            <ul key={team._id} className="list-teamMister">
-              <li className="teams" onClick={() => toggleItem(team._id)}>
-                {team.name}
-              </li>
-              {openId === team._id && (
-                <ul className="submenu">
-                  {matchesTeam
-                    .filter((match) => match.team._id === team._id)
-                    .map((match) => (
-                      <li className="matchByTeam" key={match._id}>
-                        {match.rival} - {formatDate(match.date)}
-                      </li>
-                    ))}
-                </ul>
-              )}
-            </ul>
+            <div key={team._id}>
+              <p>{team.name}</p>
+              <select id="single">
+                {matchesTeam.map((match) => 
+                  team._id === match.team._id && (
+                    <option key={match._id} value={match._id}>
+                      {match.rival} - {formatDate(match.date)}
+                    </option>)
+                )}
+              </select>
+            </div>
           ))}
         </section>
       )}

@@ -65,6 +65,10 @@
     margin: 7px 10px
 }
 
+.equipos p{
+    margin: 7px 10px;
+}
+
 .teams {
     cursor: pointer;
     list-style: none;
