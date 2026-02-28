@@ -70,12 +70,12 @@
     list-style: none;
 }
 
-.teams:hover {
+/* .teams:hover {
     background-color: var(--official-Color-Stenella);
     color: whitesmoke;
     padding: 7px 10px;
     border-radius: 8px;
-}
+} */
 
 .matchByTeam:hover {
     background-color: var(--official-Color-Stenella);
