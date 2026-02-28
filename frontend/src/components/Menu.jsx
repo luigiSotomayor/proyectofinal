@@ -68,9 +68,9 @@ const Menu = ({ setMode, setSelectedMatch }) => {
 
   const toggleItem = (id) => {
     setOpenId(openId === id ? null : id);
-    setMode("matchdetails");
+    //setMode("matchdetails");
   };
-
+/* 
   const selectedInfo = (comp) => {
     console.log("comp: ", comp);
     return (
@@ -78,7 +78,7 @@ const Menu = ({ setMode, setSelectedMatch }) => {
         <InfoData comp={comp} />
       </>
     );
-  };
+  }; */
 
   return (
     <div className="menu">
@@ -117,7 +117,7 @@ const Menu = ({ setMode, setSelectedMatch }) => {
                       .map((match) => (
                         <li
                           key={match._id}
-                          onClick={() => setSelectedMatch(match)}
+                          onClick={() => (setSelectedMatch(match), setMode("matchdetails"))}
                           className="match-item itemHover"
                         >
                           {match.team.name} - {formatDate(match.date)}
@@ -132,7 +132,7 @@ const Menu = ({ setMode, setSelectedMatch }) => {
       )}
       {user.role === "entrenador" && (
         <section className="equipos">
-          <h3 className="addMatch">Añadir partido</h3>
+          <h3 className="addMatch" onClick={() => setMode("creatematch")}>Añadir partido</h3>
           <h3>Partidos</h3>
           <ul className="list-teamMister">
             {teamMister.map((team) => (
@@ -151,7 +151,7 @@ const Menu = ({ setMode, setSelectedMatch }) => {
                         <li
                           className="matchByTeam itemHover"
                           key={match._id}
-                          onClick={() => setSelectedMatch(match._id)}
+                          onClick={() => (setSelectedMatch(match), setMode("matchdetails"))}
                         >
                           {match.rival} - {formatDate(match.date)}
                         </li>
@@ -170,7 +170,7 @@ const Menu = ({ setMode, setSelectedMatch }) => {
             {matchesTeam.map((match) => (
               <li
                 key={match._id}
-                onClick={() => setSelectedMatch(match._id)}
+                onClick={() => (setSelectedMatch(match), setMode("matchdetails"))}
                 className="match-item"
               >
                 {match.rival} - {formatDate(match.date)}
