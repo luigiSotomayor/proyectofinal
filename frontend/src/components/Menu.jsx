@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 import { apiFetch } from "../utils/apiFetch.js";
 import "../styles/Menu.css";
 import { formatDate } from "../utils/formatDate.js";
+import InfoData from "./InfoData.jsx";
 
-const Menu = () => {
+const Menu = ({ setMode }) => {
   const { logout, user } = useAuth();
   const navigate = useNavigate();
   const [teamOfPlayer, setTeamOfPlayer] = useState({});
@@ -70,6 +71,15 @@ const Menu = () => {
     setOpenId(openId === id ? null : id);
   };
 
+  const selectedInfo = (comp) => {
+    console.log("comp: ", comp);
+    return (
+      <>
+        <InfoData comp={comp} />
+      </>
+    );
+  };
+
   return (
     <div className="menu">
       <section className="logout">
@@ -79,15 +89,20 @@ const Menu = () => {
         <section className="opciones">
           <h3>Gestión de usuarios</h3>
           <ul className="gestion-usuarios ulist-menu">
-            <li className="itemHover">Altas</li>
-            <li className="itemHover">Bajas</li>
-            <li className="itemHover">Editar usuario</li>
+            <li
+              className="itemHover"
+              onClick={() => setMode("usercreate")}
+            >
+              Altas
+            </li>
+            <li className="itemHover" onClick={() => setMode("userdelete")}>Bajas</li>
+            <li className="itemHover" onClick={() => setMode("useredit")}>Editar usuario</li>
           </ul>
           <h3>Gestión de equipos</h3>
           <ul className="gestion-equipos ulist-menu">
-            <li className="itemHover">Altas</li>
-            <li className="itemHover">Bajas</li>
-            <li className="itemHover">Editar usuario</li>
+            <li className="itemHover" onClick={() => setMode("teamcreate")}>Altas</li>
+            <li className="itemHover" onClick={() => setMode("teamdelete")}>Bajas</li>
+            <li className="itemHover" onClick={() => setMode("teamedit")}>Editar</li>
           </ul>
           <h3>Partidos</h3>
           <ul className="matches-list">
