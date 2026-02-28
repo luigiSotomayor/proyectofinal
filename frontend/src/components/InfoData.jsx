@@ -6,8 +6,11 @@ import EditUser from "./EditUser.jsx";
 import CreateTeam from "./CreateTeam.jsx";
 import DeleteTeam from "./DeleteTeam.jsx";
 import EditTeam from "./EditTeam.jsx";
+import MatchDetails from "./MatchDetails.jsx";
 
-const InfoData = ({ mode }) => {
+const InfoData = ({ mode, selectedMatch }) => {
+  console.log("Modo en InfoData:", mode);
+  console.log("Partido seleccionado en InfoData:", selectedMatch);
   return (
     <div>
       {mode === "usuario" && (<InfoUser />)}
@@ -17,6 +20,7 @@ const InfoData = ({ mode }) => {
       {mode === "teamcreate" && (<CreateTeam />)}
       {mode === "teamdelete" && (<DeleteTeam />)}
       {mode === "teamedit" && (<EditTeam />)}
+      {mode === "matchdetails" && (<MatchDetails match={selectedMatch} />)}
     </div>
   );
 };

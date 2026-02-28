@@ -7,13 +7,14 @@ import "../styles/infodisplay.css";
 
 const InfoDisplay = () => {
   const [mode, setMode] = useState("usuario");
+  const [selectedMatch, setSelectedMatch] = useState(null);
 
   return (
     <div className="infodisplay">
       <SubHeader />
       <section className="main-infodisplay">
-        <Menu setMode={setMode}/>
-        <InfoData mode={mode}/>
+        <Menu setMode={setMode} setSelectedMatch={setSelectedMatch} />
+        <InfoData mode={mode} selectedMatch={selectedMatch} />
       </section>
     </div>
   );

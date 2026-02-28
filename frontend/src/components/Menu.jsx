@@ -7,14 +7,13 @@ import "../styles/Menu.css";
 import { formatDate } from "../utils/formatDate.js";
 import InfoData from "./InfoData.jsx";
 
-const Menu = ({ setMode }) => {
+const Menu = ({ setMode, setSelectedMatch }) => {
   const { logout, user } = useAuth();
   const navigate = useNavigate();
   const [teamOfPlayer, setTeamOfPlayer] = useState({});
   const [teamMister, setTeamMister] = useState([{}]);
   const [matchesTeam, setMatchesTeam] = useState([]);
   const [allMatches, setAllMatches] = useState([]);
-  const [selectedMatch, setSelectedMatch] = useState(null);
   const [openId, setOpenId] = useState(null);
   const [allTeams, setAllTeams] = useState([]);
 
@@ -69,6 +68,7 @@ const Menu = ({ setMode }) => {
 
   const toggleItem = (id) => {
     setOpenId(openId === id ? null : id);
+    setMode("matchdetails");
   };
 
   const selectedInfo = (comp) => {
@@ -117,7 +117,7 @@ const Menu = ({ setMode }) => {
                       .map((match) => (
                         <li
                           key={match._id}
-                          onClick={() => setSelectedMatch(match._id)}
+                          onClick={() => setSelectedMatch(match)}
                           className="match-item itemHover"
                         >
                           {match.team.name} - {formatDate(match.date)}
