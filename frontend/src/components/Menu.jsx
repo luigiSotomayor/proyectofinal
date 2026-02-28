@@ -96,17 +96,19 @@ const Menu = () => {
             <li className="itemHover">Editar usuario</li>
           </ul>
           <h4>Partidos</h4>
-          <ul className="matches-list">
-            {allMatches.map((match) => (
-              <li
-                key={match._id}
-                onClick={() => setSelectedMatch(match._id)}
-                className="match-item itemHover"
-              >
-                {match.team.name} - {formatDate(match.date)}
-              </li>
-            ))}
-          </ul>
+          {allTeams.map((team) => (
+            <div key={team._id}>
+              <p className="teamName">{team.name}</p>
+              <select id="single">
+                {allMatches.map((match) => 
+                  team._id === match.team._id && (
+                    <option key={match._id} className="options" value={match._id}>
+                      {match.rival} - {formatDate(match.date)}
+                    </option>)
+                )}
+              </select>
+            </div>
+          ))}
         </section>
       )}
       {user.role === "entrenador" && (
@@ -115,11 +117,11 @@ const Menu = () => {
           <h3>Partidos</h3>
           {teamMister.map((team) => (
             <div key={team._id}>
-              <p>{team.name}</p>
+              <p className="teamName">{team.name}</p>
               <select id="single">
                 {matchesTeam.map((match) => 
                   team._id === match.team._id && (
-                    <option key={match._id} value={match._id}>
+                    <option key={match._id} className="options" value={match._id}>
                       {match.rival} - {formatDate(match.date)}
                     </option>)
                 )}

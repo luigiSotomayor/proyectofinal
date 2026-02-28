@@ -65,7 +65,11 @@
     margin: 7px 10px
 }
 
-.equipos p{
+#single {
+    background-color: rgba(127, 255, 212, 0.3);
+}
+
+.teamName {
     margin: 7px 10px;
 }
 
