@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import { apiFetch } from "../utils/apiFetch";
 
 const CreateUser = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, watch, reset } = useForm();
   const token = localStorage.getItem("token");
+  const role = watch("role");
 
   const onSubmit = async (data) => {
     try {
@@ -62,19 +63,24 @@ const CreateUser = () => {
           <option value="entrenador">Entrenador</option>
           <option value="director deportivo">Director deportivo</option>
         </select>
-        <label>Posición: </label>
-        <select {...register("position")}>
-          <option value="">Seleccione: </option>
-          <option value="portero">Portero</option>
-          <option value="central">Central</option>
-          <option value="lateral">Lateral</option>
-          <option value="medio centro">Medio centro</option>
-          <option value="extremo">Extremo</option>
-          <option value="media punta">Media punta</option>
-          <option value="delantero">Delantero</option>
-        </select>
-        <label>Dorsal: </label>
-        <input {...register("dorsal")} placeholder="Dorsal" />
+        {role === "jugador" && (
+          <div>
+            <label>Posición: </label>
+            <select {...register("position")}>
+              <option value="">Seleccione: </option>
+              <option value="portero">Portero</option>
+              <option value="central">Central</option>
+              <option value="lateral">Lateral</option>
+              <option value="medio centro">Medio centro</option>
+              <option value="extremo">Extremo</option>
+              <option value="media punta">Media punta</option>
+              <option value="delantero">Delantero</option>
+            </select>
+            <label>Dorsal: </label>
+            <input {...register("dorsal")} placeholder="Dorsal" />
+          </div>
+        )}
+
         <button type="submit">Crear Usuario</button>
       </form>
     </div>
