@@ -10,7 +10,7 @@ const userSchema = new Schema(
     email: { type: String, required: true, trim: true, unique: true },
     nationality: { type: String },
     //username: { type: String, required: true, trim: true, unique: true },
-    password: { type: String, required: true, minlength: [8, "Password 8 caracter minimun"] },
+    password: { type: String, required: true },
     role: {
       type: String,
       enum: ["jugador", "entrenador", "director deportivo"],
@@ -31,8 +31,7 @@ const userSchema = new Schema(
       ],
     },
     dorsal: {type: Number},
-    userCode: { type: String, unique: true }
-    //team: {type: mongoose.Types.ObjectId, ref: 'teams' },
+    userCode: { type: String, required: true, unique: true }
   },
   {
     timestamps: true,

@@ -68,17 +68,7 @@ const Menu = ({ setMode, setSelectedMatch }) => {
 
   const toggleItem = (id) => {
     setOpenId(openId === id ? null : id);
-    //setMode("matchdetails");
   };
-/* 
-  const selectedInfo = (comp) => {
-    console.log("comp: ", comp);
-    return (
-      <>
-        <InfoData comp={comp} />
-      </>
-    );
-  }; */
 
   return (
     <div className="menu">

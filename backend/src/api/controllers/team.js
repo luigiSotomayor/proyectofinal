@@ -59,10 +59,12 @@ const getTeamByCoachId = async (req, res, next) => {
 const postTeam = async (req, res, next) => {
   try {
     const newTeam = new Team(req.body);
+    newTeam.teamCode = crypto.randomUUID();
     const teamSaved = await newTeam.save();
     return res.status(201).json(teamSaved);
   } catch (error) {
-    return res.status(400).json("Error al crear el equipo");
+    console.error(error);
+    return res.status(400).json(error);
   }
 };
 

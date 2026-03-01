@@ -1,6 +1,7 @@
 import { generateSign } from "../../utils/jwt.js";
 import User from "../models/user.js";
 import bcrypt from "bcrypt";
+import crypto from "crypto";
 
 
 const getUsers = async (req, res, next) => {
@@ -25,17 +26,18 @@ const getUser = async (req, res, next) => {
 const postUser = async (req, res, next) => {
   try {
     const newUser = new User(req.body);
+    newUser.userCode = crypto.randomUUID();
 
     const userDuplicated = await User.findOne({ email: req.body.email });
     if (userDuplicated) {
-      return res.status(400).json("El email ya está en uso");
+      return res.status(409).json("El email ya está en uso");
     }
 
     const userSaved = await newUser.save();
     return res.status(201).json(userSaved);
   } catch (error) {
     console.log(error);
-    return res.status(400).json("Error al crear el usuario");
+    return res.status(400).json(error);
   }
 };
 

@@ -10,8 +10,6 @@ import MatchDetails from "./MatchDetails.jsx";
 import CreateMatch from "./CreateMatch.jsx";
 
 const InfoData = ({ mode, selectedMatch }) => {
-  console.log("Modo en InfoData:", mode);
-  console.log("Partido seleccionado en InfoData:", selectedMatch);
   return (
     <div>
       {mode === "usuario" && (<InfoUser />)}
