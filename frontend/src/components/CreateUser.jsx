@@ -5,6 +5,7 @@ import { data } from "react-router-dom";
 const EditUser = () => {
   const [users, setUsers] = useState([]);
   const [selectedId, setSelectedId] = useState("");
+  const [state, setState] = useState("create");
   const token = localStorage.getItem("token");
   const { register, handleSubmit, reset } = useForm();
 
@@ -30,27 +31,45 @@ const EditUser = () => {
 
     const userSelected = users.find((u) => u._id === selectedId);
     if (userSelected) {
+      setState("edit");
       reset({
         ...userSelected,
         birthday: userSelected.birthday
           ? userSelected.birthday.split("T")[0]
           : "",
-      }); // 🔥 Rellena el formulario
+      });
     }
   }, [selectedId, users, reset]);
 
   // Guardar cambios
   const onSubmit = async (data) => {
-    await fetch(`http://localhost:3000/api/v1/user/${selectedId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(data),
-    });
+    if (state === "create") {
+      const response = await fetch("http://localhost:3000/api/v1/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+        throw new Error("Error al crear usuario");
+      }
+      console.log("Usuario creado:", await response.json());
+      alert("Usuario creado");
+    }
+    if (state === "edit") {
+      await fetch(`http://localhost:3000/api/v1/user/${selectedId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      });
 
-    alert("Usuario actualizado");
+      alert("Usuario actualizado");
+    }
   };
 
   // Borrar usuario
@@ -70,7 +89,6 @@ const EditUser = () => {
 
   return (
     <div>
-      {/* 🔹 PARTE 1: SELECT */}
       <select
         value={selectedId}
         onChange={(e) => setSelectedId(e.target.value)}
@@ -82,9 +100,31 @@ const EditUser = () => {
           </option>
         ))}
       </select>
+      {!state === "create" && (
+        <button
+          type="button"
+          onClick={() => {
+            setState("create");
+            setSelectedId("");
+            reset({
+              firstName: "",
+              lastName: "",
+              email: "",
+              password: "",
+              role: "",
+              birthday: "",
+              phone: "",
+              nationality: "",
+              position: "",
+              dorsal: "",
+            });
+          }}
+        >
+          Crear nuevo usuario
+        </button>
+      )}
 
-      {/* 🔹 PARTE 2: FORMULARIO */}
-      {selectedId && (
+      {state && (
         <form onSubmit={handleSubmit(onSubmit)}>
           <label>Nombre: </label>
           <input {...register("firstName")} />
@@ -121,7 +161,9 @@ const EditUser = () => {
           <label>Dorsal: </label>
           <input {...register("dorsal")} />
 
-          <button type="submit">Guardar cambios</button>
+          <button type="submit">
+            {state === "create" ? "Crear usuario" : "Guardar cambios"}
+          </button>
           <button type="button" onClick={handleDelete}>
             Borrar usuario
           </button>
