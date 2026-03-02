@@ -13,9 +13,7 @@ const InfoData = ({ mode, selectedMatch }) => {
   return (
     <div>
       {mode === "usuario" && (<InfoUser />)}
-      {mode === "usercreate" && (<CreateUser />)}
-      {mode === "userdelete" && (<DeleteUser />)}
-      {mode === "useredit" && (<EditUser />)}
+      {mode === "usersdisplay" && (<CreateUser />)}
       {mode === "teamcreate" && (<CreateTeam />)}
       {mode === "teamdelete" && (<DeleteTeam />)}
       {mode === "teamedit" && (<EditTeam />)}
