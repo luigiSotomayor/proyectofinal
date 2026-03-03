@@ -78,12 +78,7 @@ const Menu = ({ setMode, setSelectedMatch }) => {
       {user.role === "director deportivo" && (
         <section className="opciones">
           <h3 className="itemHover" onClick={() => setMode("usersdisplay")}>Gestión de usuarios</h3>
-          <h3>Gestión de equipos</h3>
-          <ul className="gestion-equipos ulist-menu">
-            <li className="itemHover" onClick={() => setMode("teamcreate")}>Altas</li>
-            <li className="itemHover" onClick={() => setMode("teamdelete")}>Bajas</li>
-            <li className="itemHover" onClick={() => setMode("teamedit")}>Editar</li>
-          </ul>
+          <h3 className="itemHover" onClick={() => setMode("teamsdisplay")}>Gestión de equipos</h3>
           <h3>Partidos</h3>
           <ul className="matches-list">
             {allTeams.map((team) => (

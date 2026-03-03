@@ -100,7 +100,7 @@ const EditUser = () => {
           </option>
         ))}
       </select>
-      {!state === "create" && (
+      {state === "edit" && (
         <button
           type="button"
           onClick={() => {

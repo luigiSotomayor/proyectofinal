@@ -13,6 +13,16 @@ const getUsers = async (req, res, next) => {
   }
 };
 
+const getUsersByRole = async (req, res, next) => {
+  try {
+    const { role } = req.params;
+    const usersByRole = await User.find({ role });
+    return res.status(200).json(usersByRole);
+  } catch (error) {
+    return res.status(400).json("Error al obtener los usuarios por rol", error);
+  }
+} 
+
 const getUser = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -88,6 +98,7 @@ const deleteUser = async (req, res, next) => {
 
 export {
     getUsers,
+    getUsersByRole,
     getUser,
     postUser,
     updateUser,
