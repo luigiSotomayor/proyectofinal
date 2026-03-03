@@ -2,7 +2,7 @@ import Team from "../models/team.js";
 
 const getTeams = async (req, res, next) => {
   try {
-    const teams = await Team.find().populate("players").populate("coach");
+    const teams = await Team.find().populate("players").populate("coach").sort({ name: 1 });
     return res.status(200).json(teams);
   } catch (error) {
     return res.status(400).json("Error al obtener los equipos");
@@ -41,15 +41,11 @@ const getTeamByUserId = async (req, res, next) => {
 const getTeamByCoachId = async (req, res, next) => {
   try {
     const { coachId } = req.params;
-    const teams = await Team.find({ coach: coachId })
+    const teams = await (await Team.find({ coach: coachId })).sort({ name: 1 }).populate("players")
       .populate("coach"); 
       if (!teams) {
       return res.status(404).json("Ningún equipo encontrado para este entrenador");
     }
-    /* const teamsToReturn = [{
-      _id: teams._id,
-      name: teams.name,
-    }]; */
     return res.status(200).json(teams);
   } catch (error) {
     return res.status(400).json("Error al obtener los equipos por id de entrenador");

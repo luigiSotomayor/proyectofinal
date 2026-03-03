@@ -20,8 +20,8 @@ const CreateTeam = () => {
             headers: { Authorization: `Bearer ${token}` },
           },
         )
-        .then((res) => res.json())
-        .then((data) => setPlayers(data));
+          .then((res) => res.json())
+          .then((data) => setPlayers(data));
 
         const listCoaches = await fetch(
           "http://localhost:3000/api/v1/user/role/entrenador",
@@ -29,14 +29,14 @@ const CreateTeam = () => {
             headers: { Authorization: `Bearer ${token}` },
           },
         )
-        .then((res) => res.json())
-        .then((data) => setCoaches(data));
+          .then((res) => res.json())
+          .then((data) => setCoaches(data));
 
         const teamsList = await fetch("http://localhost:3000/api/v1/team", {
           headers: { Authorization: `Bearer ${token}` },
         })
-        .then((res) => res.json())
-        .then((data) => setTeams(data));
+          .then((res) => res.json())
+          .then((data) => setTeams(data));
       } catch (error) {
         console.error("Error al cargar equipos:", error);
       }
@@ -51,7 +51,11 @@ const CreateTeam = () => {
     if (teamSelected) {
       setState("edit");
       reset({
-        ...teamSelected,
+        name: teamSelected.name,
+        coach: teamSelected.coach?._id || teamSelected.coach,
+        players: teamSelected.players?.map((p) =>
+          typeof p === "object" ? p._id : p,
+        ),
       });
     }
   }, [selectedId, teams, reset]);
@@ -132,14 +136,16 @@ const CreateTeam = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <label>Nombre: </label>
           <input {...register("name")} />
+          <label>Selecciona el entrenador: </label>
           <select {...register("coach")}>
             <option value="">Selecciona entrenador</option>
             {coaches.map((coach) => (
               <option key={coach._id} value={coach._id}>
-                {coach.firstName} {coach.lastName}
+                {coach.lastName}, {coach.firstName}
               </option>
             ))}
           </select>
+          <label>Selecciona los jugadores: </label>
           {players.map((player) => (
             <div key={player._id}>
               <input
@@ -147,7 +153,7 @@ const CreateTeam = () => {
                 value={player._id}
                 {...register("players")}
               />
-              {player.firstName} {player.lastName}
+              {player.lastName}, {player.firstName}
             </div>
           ))}
           <button type="submit">

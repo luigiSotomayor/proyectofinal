@@ -96,7 +96,7 @@ const EditUser = () => {
         <option value="">Selecciona un usuario</option>
         {users.map((user) => (
           <option key={user._id} value={user._id}>
-            {user.firstName} {user.lastName}
+            {user.lastName}, {user.firstName}
           </option>
         ))}
       </select>

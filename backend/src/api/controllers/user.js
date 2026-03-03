@@ -6,7 +6,7 @@ import crypto from "crypto";
 
 const getUsers = async (req, res, next) => {
   try {
-    const users = await User.find();
+    const users = await User.find().sort({ lastName: 1 });
     return res.status(200).json(users);
   } catch (error) {
     return res.status(400).json("Error al obtener los usuarios");
@@ -16,7 +16,7 @@ const getUsers = async (req, res, next) => {
 const getUsersByRole = async (req, res, next) => {
   try {
     const { role } = req.params;
-    const usersByRole = await User.find({ role });
+    const usersByRole = await User.find({ role }).sort({ lastName: 1 });
     return res.status(200).json(usersByRole);
   } catch (error) {
     return res.status(400).json("Error al obtener los usuarios por rol", error);
