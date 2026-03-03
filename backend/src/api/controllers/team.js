@@ -12,7 +12,7 @@ const getTeams = async (req, res, next) => {
 const getTeam = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const newTeam = await Team.findById(id).populate("players");
+    const newTeam = await Team.findById(id).populate("players").populate("coach");
     return res.status(200).json(newTeam);
   } catch (error) {
     return res.status(400).json("Error al obtener el equipo");

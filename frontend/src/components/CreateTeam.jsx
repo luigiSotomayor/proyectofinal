@@ -14,23 +14,29 @@ const CreateTeam = () => {
   useEffect(() => {
     const loadTeamsList = async () => {
       try {
-        const listPlayers = await fetch("http://localhost:3000/api/v1/user/role/jugador", {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-          .then((res) => res.json())
-          .then((data) => setPlayers(data));
+        const listPlayers = await fetch(
+          "http://localhost:3000/api/v1/user/role/jugador",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        )
+        .then((res) => res.json())
+        .then((data) => setPlayers(data));
 
-        const listCoaches = await fetch("http://localhost:3000/api/v1/user/role/entrenador", {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-          .then((res) => res.json())
-          .then((data) => setCoaches(data));
+        const listCoaches = await fetch(
+          "http://localhost:3000/api/v1/user/role/entrenador",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        )
+        .then((res) => res.json())
+        .then((data) => setCoaches(data));
 
         const teamsList = await fetch("http://localhost:3000/api/v1/team", {
           headers: { Authorization: `Bearer ${token}` },
         })
-          .then((res) => res.json())
-          .then((data) => setTeams(data));
+        .then((res) => res.json())
+        .then((data) => setTeams(data));
       } catch (error) {
         console.error("Error al cargar equipos:", error);
       }
@@ -60,10 +66,11 @@ const CreateTeam = () => {
         },
         body: JSON.stringify(data),
       });
+      const newTeam = await response.json();
+      setTeams((prev) => [...prev, newTeam]);
       if (!response.ok) {
         throw new Error("Error al crear equipo");
       }
-      console.log("Equipo creado:", await response.json());
       alert("Equipo creado");
     }
     if (state === "edit") {
@@ -125,6 +132,24 @@ const CreateTeam = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <label>Nombre: </label>
           <input {...register("name")} />
+          <select {...register("coach")}>
+            <option value="">Selecciona entrenador</option>
+            {coaches.map((coach) => (
+              <option key={coach._id} value={coach._id}>
+                {coach.firstName} {coach.lastName}
+              </option>
+            ))}
+          </select>
+          {players.map((player) => (
+            <div key={player._id}>
+              <input
+                type="checkbox"
+                value={player._id}
+                {...register("players")}
+              />
+              {player.firstName} {player.lastName}
+            </div>
+          ))}
           <button type="submit">
             {state === "create" ? "Crear equipo" : "Guardar cambios"}
           </button>
