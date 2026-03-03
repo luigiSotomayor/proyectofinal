@@ -39,11 +39,6 @@ export const seedUsers = async () => {
             await user.save(); // dispara pre-save hook y encripta password
             usersMap.set(user.userCode, user._id); // llenamos el map para usar en otras seeds
           }
-
-          /* const createdUsers = await User.insertMany(users);
-          createdUsers.forEach((user) => {
-            usersMap.set(user.userCode, user._id);
-          }); */
           resolve(usersMap);
         } catch (err) {
           reject(err);

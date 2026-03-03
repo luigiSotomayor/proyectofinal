@@ -1,0 +1,26 @@
+.match-stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.match-stats-table th,
+.match-stats-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.match-stats-table th {
+  background-color: var(--official-Color-Stenella);
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+.match-stats-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.match-stats-table tr:hover {
+  background-color: #f86c6c;
+}

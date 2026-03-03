@@ -2,7 +2,10 @@ import Team from "../models/team.js";
 
 const getTeams = async (req, res, next) => {
   try {
-    const teams = await Team.find().populate("players").populate("coach").sort({ name: 1 });
+    const teams = await Team.find()
+      .populate("players")
+      .populate("coach")
+      .sort({ name: 1 });
     return res.status(200).json(teams);
   } catch (error) {
     return res.status(400).json("Error al obtener los equipos");
@@ -12,7 +15,9 @@ const getTeams = async (req, res, next) => {
 const getTeam = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const newTeam = await Team.findById(id).populate("players").populate("coach");
+    const newTeam = await Team.findById(id)
+      .populate("players")
+      .populate("coach");
     return res.status(200).json(newTeam);
   } catch (error) {
     return res.status(400).json("Error al obtener el equipo");
@@ -41,14 +46,20 @@ const getTeamByUserId = async (req, res, next) => {
 const getTeamByCoachId = async (req, res, next) => {
   try {
     const { coachId } = req.params;
-    const teams = await (await Team.find({ coach: coachId })).sort({ name: 1 }).populate("players")
-      .populate("coach"); 
-      if (!teams) {
-      return res.status(404).json("Ningún equipo encontrado para este entrenador");
+    const teams = await Team.find({ coach: coachId })
+      .sort({ name: 1 })
+      .populate("players")
+      .populate("coach");
+    if (!teams) {
+      return res
+        .status(404)
+        .json("Ningún equipo encontrado para este entrenador");
     }
     return res.status(200).json(teams);
   } catch (error) {
-    return res.status(400).json("Error al obtener los equipos por id de entrenador");
+    return res
+      .status(400)
+      .json("Error al obtener los equipos por id de entrenador");
   }
 };
 
@@ -90,4 +101,12 @@ const deleteTeam = async (req, res, next) => {
   }
 };
 
-export { getTeams, getTeam, getTeamByUserId, getTeamByCoachId, postTeam, updateTeam, deleteTeam };
+export {
+  getTeams,
+  getTeam,
+  getTeamByUserId,
+  getTeamByCoachId,
+  postTeam,
+  updateTeam,
+  deleteTeam,
+};

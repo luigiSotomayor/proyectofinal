@@ -34,8 +34,6 @@ export const seedTeams = async (usersMap) => {
           teamsMap.set(key, created[i]._id);
           i++;
         }
-        console.log("CLAVES REALES DEL teamsMap:");
-        console.log([...teamsMap.keys()]);
         resolve(teamsMap);
       });
   });

@@ -100,7 +100,7 @@ const Menu = ({ setMode, setSelectedMatch }) => {
                           onClick={() => (setSelectedMatch(match), setMode("matchdetails"))}
                           className="match-item itemHover"
                         >
-                          {match.team.name} - {formatDate(match.date)}
+                          {match.rival} - {formatDate(match.date)}
                         </li>
                       ))}
                   </ul>

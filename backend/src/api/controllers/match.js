@@ -2,7 +2,7 @@ import Match from "../models/match.js";
 
 const getMatches = async (req, res, next) => {
   try {
-    const matches = await Match.find().populate("team", "name");
+    const matches = await Match.find().populate("team").populate({path: "stats.player", model: "users"}).sort({ date: 1});
     return res.status(200).json(matches);
   } catch (error) {
     return res.status(400).json("Error al obtener los partidos");
@@ -13,7 +13,7 @@ const getMatchesByTeam = async (req, res, next) => {
   try {
     const { teamId } = req.params;
 
-    const matches = await Match.find({ team: teamId }).populate("team", "name");
+    const matches = await Match.find({ team: teamId }).populate("team").populate("stats.player");
 
     return res.status(200).json(matches);
   } catch (error) {
@@ -25,7 +25,7 @@ const getMatchesByTeam = async (req, res, next) => {
 const getMatch = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const newMatch = await Match.findById(id);
+        const newMatch = await Match.findById(id).populate("team").populate("stats.player");
         return res.status(200).json(newMatch);
     } catch (error) {
         return res.status(400).json("Error al obtener el partido");

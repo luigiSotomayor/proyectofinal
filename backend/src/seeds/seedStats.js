@@ -29,10 +29,10 @@ export const seedStats = async (matchesMap, usersMap) => {
         statsByMatch[row.match].push({
           player: playerId,
           minutes: Number(row.minutes),
-          titular: Boolean(row.titular),
-          yellowCards: Boolean(row.yellowCards),
-          doubleYellowCards: Boolean(row.doubleYellowCards),
-          redCards: Boolean(row.redCards),
+          titular: row.titular === 'true',
+          yellowCards: row.yellowCards === 'true',
+          doubleYellowCards: row.doubleYellowCards === 'true',
+          redCards: row.redCards === 'true',
           goalsScored: Number(row.goalsScored),
           goalsConceded: Number(row.goalsConceded),
           rating: Number(row.rating),
@@ -59,7 +59,6 @@ export const seedStats = async (matchesMap, usersMap) => {
             });
           }
 
-          console.log("Seed de stats cargada con éxito.");
           resolve();
         } catch (err) {
           reject(err);
