@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 
 const CreateTeam = () => {
   const [teams, setTeams] = useState([]);
+  const [players, setPlayers] = useState([]);
+  const [coaches, setCoaches] = useState([]);
   const [selectedId, setSelectedId] = useState("");
   const [state, setState] = useState("create");
   const { register, handleSubmit, reset } = useForm();
@@ -12,6 +14,18 @@ const CreateTeam = () => {
   useEffect(() => {
     const loadTeamsList = async () => {
       try {
+        const listPlayers = await fetch("http://localhost:3000/api/v1/user/role/jugador", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+          .then((res) => res.json())
+          .then((data) => setPlayers(data));
+
+        const listCoaches = await fetch("http://localhost:3000/api/v1/user/role/entrenador", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+          .then((res) => res.json())
+          .then((data) => setCoaches(data));
+
         const teamsList = await fetch("http://localhost:3000/api/v1/team", {
           headers: { Authorization: `Bearer ${token}` },
         })
