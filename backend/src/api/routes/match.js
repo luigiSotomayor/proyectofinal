@@ -11,7 +11,7 @@ const matchRouter = express.Router();
 matchRouter.get("/", isAuth, hasRole(["director deportivo"]), getMatches);
 matchRouter.get("/team/:teamId", isAuth, getMatchesByTeam);
 matchRouter.get("/:id", isAuth, canAccessMatchTeam, getMatch);
-matchRouter.post("/", isAuth, hasRole(["director deportivo"]), postMatch);
+matchRouter.post("/", isAuth, hasRole(["director deportivo", "entrenador"]), postMatch);
 matchRouter.put("/:id", isAuth, canAccessUpdateTeam, updateMatch);
 matchRouter.delete("/:id", isAuth, hasRole(["director deportivo"]), deleteMatch);
 
