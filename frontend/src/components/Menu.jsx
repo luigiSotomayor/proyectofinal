@@ -146,7 +146,7 @@ const Menu = ({ setMode, setSelectedMatch }) => {
                           key={match._id}
                           onClick={() => (
                             setSelectedMatch(match),
-                            setMode("matchdetails")
+                            setMode("editmatchdetails")
                           )}
                         >
                           {match.rival} - {formatDate(match.date)}

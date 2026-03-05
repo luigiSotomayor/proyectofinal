@@ -3,15 +3,17 @@ import { formatDate } from "../utils/formatDate";
 import "../styles/MatchDetails.css";
 
 const MatchDetails = ({ match }) => {
-  console.log("partido: ", match);
   return (
     <>
       <div>{match.team.name}</div>
       <div>
-        {match.rival} {formatDate(match.date)} {match.home}
+        <p>Rival: {match.rival}</p>
+        <p>Fecha: {formatDate(match.date)}</p>
+        <p>Campo: {match.home === true ? "Local" : "Visitante"}</p>
       </div>
       <div>
-        {match.championship} {match.jornada}
+        <p>Campeonato: {match.championship}</p>
+        <p>Jornada: {match.jornada}</p>
       </div>
       <div>Estadísticas del partido: </div>
       <table className="match-stats-table">
