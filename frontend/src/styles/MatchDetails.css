@@ -24,3 +24,8 @@
 .match-stats-table tr:hover {
   background-color: #f86c6c;
 }
+
+.inputTdNumbers {
+  width: 30px;
+  text-align: center;
+}

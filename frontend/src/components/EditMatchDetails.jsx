@@ -1,5 +1,3 @@
-import React from "react";
-import { formatDate } from "../utils/formatDate.js";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { apiFetch } from "../utils/apiFetch.js";
@@ -163,7 +161,7 @@ const EditMatchDetails = ({ match }) => {
                 </td>
 
                 <td>
-                  <input
+                  <input className="inputTdNumbers"
                     type="number"
                     {...register(`stats.${index}.minutes`)}
                   />
@@ -191,21 +189,21 @@ const EditMatchDetails = ({ match }) => {
                 </td>
 
                 <td>
-                  <input
+                  <input className="inputTdNumbers"
                     type="number"
                     {...register(`stats.${index}.goalsScored`)}
                   />
                 </td>
 
                 <td>
-                  <input
+                  <input className="inputTdNumbers"
                     type="number"
                     {...register(`stats.${index}.goalsConceded`)}
                   />
                 </td>
 
                 <td>
-                  <input
+                  <input className="inputTdNumbers"
                     type="number"
                     step="0.1"
                     {...register(`stats.${index}.rating`)}
