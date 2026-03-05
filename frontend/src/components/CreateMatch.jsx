@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
 
 const CreateMatch = () => {
   const [teamsMister, setTeamsMister] = useState([]);
@@ -8,17 +8,18 @@ const CreateMatch = () => {
   const { register, handleSubmit, reset } = useForm();
   const token = localStorage.getItem("token");
 
+  const loadTeamsByCoach = async (data) => {
+    const listTeams = await fetch(
+      `http://localhost:3000/api/v1/team/coach/${user._id}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    )
+      .then((res) => res.json())
+      .then((data) => setTeamsMister(data));
+  };
+
   useEffect(() => {
-    const loadTeamsByCoach = async (data) => {
-      const listTeams = await fetch(
-        `http://localhost:3000/api/v1/team/coach/${user._id}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      )
-        .then((res) => res.json())
-        .then((data) => setTeamsMister(data));
-    };
     loadTeamsByCoach();
   }, []);
 
@@ -33,6 +34,7 @@ const CreateMatch = () => {
         body: JSON.stringify(data),
       });
       reset();
+      await loadTeamsByCoach();
       alert("Partido creado");
     } catch (error) {
       console.error("Error al cargarse los partidos", error);

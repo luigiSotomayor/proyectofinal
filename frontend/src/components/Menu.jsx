@@ -1,5 +1,6 @@
 import Button from "./Button.jsx";
 import { useAuth } from "../context/AuthContext";
+import { useMatch } from "../context/MatchContext.jsx";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { apiFetch } from "../utils/apiFetch.js";
@@ -7,15 +8,17 @@ import "../styles/Menu.css";
 import { formatDate } from "../utils/formatDate.js";
 import InfoData from "./InfoData.jsx";
 
-const Menu = ({ setMode, setSelectedMatch }) => {
+const Menu = ({ setMode }) => {
   const { logout, user } = useAuth();
+  const { selectedMatch, setSelectedMatch, matches, setMatches } = useMatch();
   const navigate = useNavigate();
   const [teamOfPlayer, setTeamOfPlayer] = useState({});
   const [teamMister, setTeamMister] = useState([{}]);
-  const [matchesTeam, setMatchesTeam] = useState([]);
+  /* const [matchesTeam, setMatchesTeam] = useState([]); */
   const [allMatches, setAllMatches] = useState([]);
   const [openId, setOpenId] = useState(null);
   const [allTeams, setAllTeams] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const loadMatches = async () => {
@@ -43,7 +46,7 @@ const Menu = ({ setMode, setSelectedMatch }) => {
             );
             allMatches = [...allMatches, ...matches];
           }
-          setMatchesTeam(allMatches);
+          setMatches(allMatches);
         }
 
         if (user?.role === "jugador") {
@@ -54,7 +57,7 @@ const Menu = ({ setMode, setSelectedMatch }) => {
           const matchesTeamReq = await apiFetch(
             `http://localhost:3000/api/v1/match/team/${teamReq._id}`,
           );
-          setMatchesTeam(matchesTeamReq);
+          setMatches(matchesTeamReq);
         }
       } catch (error) {
         console.error(error);
@@ -62,7 +65,11 @@ const Menu = ({ setMode, setSelectedMatch }) => {
     };
 
     loadMatches();
-  }, []);
+  }, [refresh]);
+
+  const handleSelectMatch = (match) => {
+    setSelectedMatch(match);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -71,6 +78,7 @@ const Menu = ({ setMode, setSelectedMatch }) => {
   };
 
   const toggleItem = (id) => {
+    setRefresh((prev) => !prev);
     setOpenId(openId === id ? null : id);
   };
 
@@ -138,7 +146,7 @@ const Menu = ({ setMode, setSelectedMatch }) => {
                 </div>
                 {openId === team._id && (
                   <ul className="submenu">
-                    {matchesTeam
+                    {matches
                       .filter((match) => match.team._id === team._id)
                       .map((match) => (
                         <li
@@ -163,7 +171,7 @@ const Menu = ({ setMode, setSelectedMatch }) => {
         <section className="partidos">
           <h3>{teamOfPlayer.name}</h3>
           <ul className="matches-list">
-            {matchesTeam.map((match) => (
+            {matches.map((match) => (
               <li
                 key={match._id}
                 onClick={() => (

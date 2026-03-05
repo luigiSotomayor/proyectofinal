@@ -1,22 +1,20 @@
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { apiFetch } from "../utils/apiFetch.js";
+import { useMatch } from "../context/MatchContext.jsx";
 
-const EditMatchDetails = ({ match }) => {
+const EditMatchDetails = () => {
+  const { setSelectedMatch, selectedMatch, setMatches, matches } = useMatch();
   const token = localStorage.getItem("token");
+
   const [teamPlayers, setTeamPlayers] = useState([]);
   const { register, handleSubmit, setValue, reset } = useForm();
-
-  useEffect(() => {
-    if (match?.stats) {
-      setValue("stats", match.stats);
-    }
-  }, [match, setValue]);
+  /* const [refresh, setRefresh] = useState(false); */
 
   useEffect(() => {
     const loadPlayers = async () => {
       const players = await apiFetch(
-        `http://localhost:3000/api/v1/team/${match.team._id}`,
+        `http://localhost:3000/api/v1/team/${selectedMatch.team._id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -27,16 +25,18 @@ const EditMatchDetails = ({ match }) => {
       setTeamPlayers(players.players);
     };
 
-    if (match?.team?._id) {
+    if (selectedMatch?.team?._id) {
       loadPlayers();
     }
-  }, [match]);
+  }, [selectedMatch]);
 
   useEffect(() => {
     if (!teamPlayers.length) return;
 
     const initialStats = teamPlayers.map((player) => {
-      const stat = match.stats?.find((s) => s.player._id === player._id);
+      const stat = selectedMatch.stats?.find(
+        (s) => s.player?._id === player._id,
+      );
 
       return {
         player: player._id,
@@ -52,19 +52,19 @@ const EditMatchDetails = ({ match }) => {
     });
 
     reset({
-      rival: match.rival,
-      date: match.date?.slice(0, 10),
-      home: match.home,
-      championship: match.championship,
-      jornada: match.jornada,
+      rival: selectedMatch.rival,
+      date: selectedMatch.date?.slice(0, 10),
+      home: selectedMatch.home,
+      championship: selectedMatch.championship,
+      jornada: selectedMatch.jornada,
       stats: initialStats,
     });
-  }, [teamPlayers, match, reset]);
+  }, [teamPlayers, selectedMatch, reset]);
 
   const onSubmit = async (data) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/v1/match/${match._id}`,
+        `http://localhost:3000/api/v1/match/${selectedMatch._id}`,
         {
           method: "PUT",
           headers: {
@@ -72,18 +72,22 @@ const EditMatchDetails = ({ match }) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-              rival: data.rival,
-              date: data.date,
-              home: data.home,
-              championship: data.championship,
-              jornada: data.jornada,
-              stats: data.stats,
+            rival: data.rival,
+            date: data.date,
+            home: data.home,
+            championship: data.championship,
+            jornada: data.jornada,
+            stats: data.stats,
           }),
         },
       );
-
+      const newMatch = await response.json();
       if (!response.ok) throw new Error("Error guardando partido");
-
+      console.log("New match: ", newMatch);
+      setSelectedMatch(newMatch);
+      setMatches((prev) =>
+        prev.map((m) => (m._id === newMatch._id ? newMatch : m)),
+      );
       alert("Partido actualizado correctamente");
     } catch (error) {
       console.error(error);
@@ -93,7 +97,7 @@ const EditMatchDetails = ({ match }) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>{match.team.name}</div>
+        <div>{selectedMatch.team.name}</div>
         <div>
           <label>Rival:</label>
           <input {...register("rival")} />
@@ -106,9 +110,9 @@ const EditMatchDetails = ({ match }) => {
 
         <div>
           <label>Campo:</label>
-          <select {...register("home")}>
-            <option value={true}>Local</option>
-            <option value={false}>Visitante</option>
+          <select {...register("home", { setValueAs: (v) => v === "true" })}>
+            <option value="true">Local</option>
+            <option value="false">Visitante</option>
           </select>
         </div>
 
@@ -161,9 +165,12 @@ const EditMatchDetails = ({ match }) => {
                 </td>
 
                 <td>
-                  <input className="inputTdNumbers"
+                  <input
+                    className="inputTdNumbers"
                     type="number"
-                    {...register(`stats.${index}.minutes`)}
+                    {...register(`stats.${index}.minutes`, {
+                      valueAsNumber: true,
+                    })}
                   />
                 </td>
 
@@ -189,24 +196,33 @@ const EditMatchDetails = ({ match }) => {
                 </td>
 
                 <td>
-                  <input className="inputTdNumbers"
+                  <input
+                    className="inputTdNumbers"
                     type="number"
-                    {...register(`stats.${index}.goalsScored`)}
+                    {...register(`stats.${index}.goalsScored`, {
+                      valueAsNumber: true,
+                    })}
                   />
                 </td>
 
                 <td>
-                  <input className="inputTdNumbers"
+                  <input
+                    className="inputTdNumbers"
                     type="number"
-                    {...register(`stats.${index}.goalsConceded`)}
+                    {...register(`stats.${index}.goalsConceded`, {
+                      valueAsNumber: true,
+                    })}
                   />
                 </td>
 
                 <td>
-                  <input className="inputTdNumbers"
+                  <input
+                    className="inputTdNumbers"
                     type="number"
                     step="0.1"
-                    {...register(`stats.${index}.rating`)}
+                    {...register(`stats.${index}.rating`, {
+                      valueAsNumber: true,
+                    })}
                   />
                 </td>
               </tr>

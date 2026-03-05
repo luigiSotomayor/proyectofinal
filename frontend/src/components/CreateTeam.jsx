@@ -11,36 +11,37 @@ const CreateTeam = () => {
   const { register, handleSubmit, reset } = useForm();
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    const loadTeamsList = async () => {
-      try {
-        const listPlayers = await fetch(
-          "http://localhost:3000/api/v1/user/role/jugador",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          },
-        )
-          .then((res) => res.json())
-          .then((data) => setPlayers(data));
-
-        const listCoaches = await fetch(
-          "http://localhost:3000/api/v1/user/role/entrenador",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          },
-        )
-          .then((res) => res.json())
-          .then((data) => setCoaches(data));
-
-        const teamsList = await fetch("http://localhost:3000/api/v1/team", {
+  const loadTeamsList = async () => {
+    try {
+      const listPlayers = await fetch(
+        "http://localhost:3000/api/v1/user/role/jugador",
+        {
           headers: { Authorization: `Bearer ${token}` },
-        })
-          .then((res) => res.json())
-          .then((data) => setTeams(data));
-      } catch (error) {
-        console.error("Error al cargar equipos:", error);
-      }
-    };
+        },
+      )
+        .then((res) => res.json())
+        .then((data) => setPlayers(data));
+
+      const listCoaches = await fetch(
+        "http://localhost:3000/api/v1/user/role/entrenador",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      )
+        .then((res) => res.json())
+        .then((data) => setCoaches(data));
+
+      const teamsList = await fetch("http://localhost:3000/api/v1/team", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.json())
+        .then((data) => setTeams(data));
+    } catch (error) {
+      console.error("Error al cargar equipos:", error);
+    }
+  };
+
+  useEffect(() => {
     loadTeamsList();
   }, []);
 
@@ -75,6 +76,7 @@ const CreateTeam = () => {
       if (!response.ok) {
         throw new Error("Error al crear equipo");
       }
+      await loadTeamsList();
       alert("Equipo creado");
     }
     if (state === "edit") {

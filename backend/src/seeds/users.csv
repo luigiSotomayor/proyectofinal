@@ -1,37 +1,49 @@
 ﻿userCode;firstName;lastName;birthday;phone;email;nationality;password;role;position;dorsal
-U0001;Carlos;Mendoza Ruiz;2007-03-12;612345788;carlos.mendoza12@mailfalso.com;España;12345678;jugador;portero;1
-U0002;Alejandro;Ruiz Martín;2007-02-14;612345701;alejandro.ruiz07@mailfalso.com;España;12345678;jugador;central;2
-U0003;Daniel;Gómez Torres;2007-05-28;623781214;daniel.gomez@mailfalso.com;España;12345678;jugador;lateral;3
-U0004;Iván;López Sánchez;2007-01-03;634209568;ivan.lopez07@mailfalso.com;España;12345678;jugador;lateral;4
-U0005;Sergio;Morales Díaz;2007-07-19;645874119;sergio.morales07@mailfalso.com;España;12345678;jugador;medio centro;5
-U0006;Pablo;Herrera Cruz;2007-11-09;656193482;pablo.herrera07@mailfalso.com;España;12345678;jugador;medio centro;6
-U0007;Lucas;Navarro Gil;2007-03-21;667560329;lucas.navarro07@mailfalso.com;España;12345678;jugador;extremo;7
-U0008;Álvaro;Romero Vega;2007-09-16;678742905;alvaro.romero07@mailfalso.com;España;12345678;jugador;extremo;8
-U0009;Mario;Castillo Blanco;2007-06-04;689381672;mario.castillo07@mailfalso.com;España;12345678;jugador;media punta;9
-U0010;Hugo;Fernández Ríos;2007-10-30;611908451;hugo.fernandez07@mailfalso.com;España;12345678;jugador;media punta;10
-U0011;Adrián;Molina Pardo;2007-12-12;621347897;adrian.molina07@mailfalso.com;España;12345678;jugador;delantero;11
-U0012;Diego;Ortega Salas;2007-04-25;632918308;diegan.ortega07@mailfalso.com;España;12345678;jugador;delantero;12
-U0013;Javier;Campos León;2007-08-08;643502774;javian.campos07@mailfalso.com;España;12345678;jugador;delantero;13
-U0014;Rubén;Fuentes Rey;2007-01-17;654120993;ruban.fuentes07@mailfalso.com;España;12345678;jugador;central;14
-U0015;Marcos;Vidal Nieto;2007-06-22;665784219;marcan.vidal07@mailfalso.com;España;12345678;jugador;lateral;15
-U0016;Samuel;Peña Lozano;2007-09-05;676435681;samuan.peña07@mailfalso.com;España;12345678;jugador;medio centro;16
-U0017;Leo;Domínguez Arias;2010-02-11;687210540;lan.domínguez10@mailfalso.com;España;12345678;jugador;portero;1
-U0018;Eric;Ramos Prieto;2010-04-29;698901337;eran.ramos10@mailfalso.com;España;12345678;jugador;central;2
-U0019;Bruno;Suárez Méndez;2010-07-07;610456982;bruan.suárez10@mailfalso.com;España;12345678;jugador;lateral;3
-U0020;Thiago;Cordero Gil;2010-01-18;620789117;thiaan.cordero10@mailfalso.com;Brasil;12345678;jugador;lateral;4
-U0021;Gael;Aguilar Cano;2010-09-23;631234654;gaan.aguilar10@mailfalso.com;España;12345678;jugador;medio centro;5
-U0022;Iker;Pastor Molina;2010-05-14;643890326;ikan.pastor10@mailfalso.com;España;12345678;jugador;medio centro;6
-U0023;Enzo;Núñez Serra;2010-03-01;653471883;enan.núñez10@mailfalso.com;Italia;12345678;jugador;extremo;7
-U0024;Nil;Beltrán Roca;2010-06-27;664318559;nan.beltrán10@mailfalso.com;España;12345678;jugador;extremo;8
-U0025;Pol;Esteban Cruz;2010-10-10;675902181;pan.esteban10@mailfalso.com;España;12345678;jugador;media punta;9
-U0026;Unai;Muñoz Vidal;2010-12-01;686540778;unan.muñoz10@mailfalso.com;España;12345678;jugador;media punta;10
-U0027;Álex;Ferrer Soler;2010-08-19;697114237;álan.ferrer10@mailfalso.com;España;12345678;jugador;delantero;11
-U0028;Joel;Iglesias;2010-11-06;609783949;joan.iglesias10@mailfalso.com;España;12345678;jugador;delantero;12
-U0029;Rayan;Ponce Marín;2010-02-15;619345603;rayan.ponce10@mailfalso.com;España;12345678;jugador;delantero;13
-U0030;Noah;Carrasco Peña;2010-05-28;629871395;noan.carrasco10@mailfalso.com;España;12345678;jugador;central;14
-U0031;Mateo;Cabrera Soto;2010-09-09;638456210;matan.cabrera10@mailfalso.com;España;12345678;jugador;lateral;15
-U0032;Antonio;Sánchez Tálvez;1997-03-01;645789126;antonio.sanchez87@mailfalso.com;España;12345678;entrenador;;
-U0033;Michael;Finn;1993-08-07;614755447;michael.finn93@mailfalso.com;Inglaterra;12345678;entrenador;;
-U0034;Ronaldo;Nazariño Viño;1988-06-25;635715948;ronaldo.nazariño88@mailfalso.com;Brasil;12345678;entrenador;;
-U0035;Jaime;Gutiérrez Prim;1975-03-31;694318756;jaime.gutierrez75@mailfalso.com;España;12345678;entrenador;;
-U0036;Emilio;Zamora Gordillo;1965-10-10;615487235;emilio.zamora65@mailfalso.com;España;12345678;director deportivo;;
+U0001;Carlos;Mendoza Ruiz;12/03/2007;612345788;carlos.mendoza07@mailfalso.com;España;12345678;jugador;portero;1
+U0002;Alejandro;Ruiz Martín;14/02/2007;612345701;alejandro.ruiz07@mailfalso.com;España;12345678;jugador;central;2
+U0003;Daniel;Gómez Torres;28/05/2007;623781214;daniel.gomez07@mailfalso.com;España;12345678;jugador;lateral;3
+U0004;Iván;López Sánchez;03/01/2007;634209568;ivan.lopez07@mailfalso.com;España;12345678;jugador;lateral;4
+U0005;Sergio;Morales Díaz;19/07/2007;645874119;sergio.morales07@mailfalso.com;España;12345678;jugador;medio centro;5
+U0006;Pablo;Herrera Cruz;09/11/2007;656193482;pablo.herrera07@mailfalso.com;España;12345678;jugador;medio centro;6
+U0007;Lucas;Navarro Gil;21/03/2007;667560329;lucas.navarro07@mailfalso.com;España;12345678;jugador;extremo;7
+U0008;Álvaro;Romero Vega;16/09/2007;678742905;alvaro.romero07@mailfalso.com;España;12345678;jugador;extremo;8
+U0009;Mario;Castillo Blanco;04/06/2007;689381672;mario.castillo07@mailfalso.com;España;12345678;jugador;media punta;9
+U0010;Hugo;Fernández Ríos;30/10/2007;611908451;hugo.fernandez07@mailfalso.com;España;12345678;jugador;media punta;10
+U0011;Adrián;Molina Pardo;12/12/2007;621347897;adrian.molina07@mailfalso.com;España;12345678;jugador;delantero;11
+U0012;Diego;Ortega Salas;25/04/2007;632918308;diego.ortega07@mailfalso.com;España;12345678;jugador;delantero;12
+U0013;Javier;Campos León;08/08/2007;643502774;javier.campos07@mailfalso.com;España;12345678;jugador;delantero;13
+U0014;Rubén;Fuentes Rey;17/01/2007;654120993;ruben.fuentes07@mailfalso.com;España;12345678;jugador;central;14
+U0015;Marcos;Vidal Nieto;22/06/2007;665784219;marcos.vidal07@mailfalso.com;España;12345678;jugador;lateral;15
+U0016;Samuel;Peña Lozano;05/09/2007;676435681;samuel.pena07@mailfalso.com;España;12345678;jugador;medio centro;16
+U0017;Leo;Domínguez Arias;11/02/2010;687210540;leo.dominguez10@mailfalso.com;España;12345678;jugador;portero;1
+U0018;Eric;Ramos Prieto;29/04/2010;698901337;eric.ramos10@mailfalso.com;España;12345678;jugador;central;2
+U0019;Bruno;Suárez Méndez;07/07/2010;610456982;bruno.suarez10@mailfalso.com;España;12345678;jugador;lateral;3
+U0020;Thiago;Cordero Gil;18/01/2010;620789117;thiago.cordero10@mailfalso.com;Brasil;12345678;jugador;lateral;4
+U0021;Gael;Aguilar Cano;23/09/2010;631234654;gael.aguilar10@mailfalso.com;España;12345678;jugador;medio centro;5
+U0022;Iker;Pastor Molina;14/05/2010;643890326;iker.pastor10@mailfalso.com;España;12345678;jugador;medio centro;6
+U0023;Enzo;Núñez Serra;01/03/2010;653471883;enzo.nunez10@mailfalso.com;Italia;12345678;jugador;extremo;7
+U0024;Nil;Beltrán Roca;27/06/2010;664318559;nil.beltran10@mailfalso.com;España;12345678;jugador;extremo;8
+U0025;Pol;Esteban Cruz;10/10/2010;675902181;pol.esteban10@mailfalso.com;España;12345678;jugador;media punta;9
+U0026;Unai;Muñoz Vidal;01/12/2010;686540778;unai.munoz10@mailfalso.com;España;12345678;jugador;media punta;10
+U0027;Álex;Ferrer Soler;19/08/2010;697114237;alex.ferrer10@mailfalso.com;España;12345678;jugador;delantero;11
+U0028;Joel;Iglesias;06/11/2010;609783949;joel.iglesias10@mailfalso.com;España;12345678;jugador;delantero;12
+U0029;Rayan;Ponce Marín;15/02/2010;619345603;rayan.ponce10@mailfalso.com;España;12345678;jugador;delantero;13
+U0030;Noah;Carrasco Peña;28/05/2010;629871395;noah.carrasco10@mailfalso.com;España;12345678;jugador;central;14
+U0031;Mateo;Cabrera Soto;09/09/2010;638456210;mateo.cabrera10@mailfalso.com;España;12345678;jugador;lateral;15
+U0032;Antonio;Sánchez Tálvez;01/03/1997;645789126;antonio.sanchez87@mailfalso.com;España;12345678;entrenador;;
+U0033;Michael;Finn;07/08/1993;614755447;michael.finn93@mailfalso.com;Inglaterra;12345678;entrenador;;
+U0034;Ronaldo;Nazariño Viño;25/06/1988;635715948;ronaldo.nazarino88@mailfalso.com;Brasil;12345678;entrenador;;
+U0035;Jaime;Gutiérrez Prim;31/03/1975;694318756;jaime.gutierrez75@mailfalso.com;España;12345678;entrenador;;
+U0036;Emilio;Zamora Gordillo;10/10/1965;615487235;emilio.zamora65@mailfalso.com;España;12345678;director deportivo;;
+U0037;Javier;Peña Manzano;03/05/2019;154879565;javier.pena19@mailfalso.com;Portugal;12345678;jugador;;
+U0038;Piere;Montaud Zalem;05/12/2019;635241987;piere.montaud19@mailfalso.com;Francia;12345678;jugador;;
+U0039;Oliver;Zarrán Gómez;25/01/2019;695847153;oliver.zarran19@mailfalso.com;España;12345678;jugador;;
+U0040;Alejandro;Martín Simón;31/07/2019;678459123;alejandro.martin19@mailfalso.com;España;12345678;jugador;;
+U0041;Pedro;Pajares Pérez;01/01/2017;684125798;pedro.pajares17@mailfalso.com;España;12345678;jugador;;
+U0042;Andrés;Molinero Sánchez;09/06/2017;639635624;andres.molinero17@mailfalso.com;España;12345678;jugador;;
+U0043;Emilio;Parga Reno;15/02/2017;615489572;emilio.parga17@mailfalso.com;España;12345678;jugador;;
+U0044;Julio;Molinari Andreu;29/10/2017;613498523;julio.molinari17@mailfalso.com;Italia;12345678;jugador;;
+U0045;Jaime;Martínez Martín;28/10/2014;612453784;jaime.martinez14@mailfalso.com;España;12345679;jugador;;
+U0046;Leopoldo;García Pérez;15/07/2015;666554231;leopoldo.garcia15@mailfalso.com;España;12345680;jugador;;
+U0047;Carlos;Loigorri Castro;21/11/2014;647472153;carlos.loigorri14@mailfalso.com;España;12345681;jugador;;
+U0048;Juan;Valdéz Viña;09/08/2015;612456789;juan.valdez15@mailfalso.com;España;12345682;jugador;;

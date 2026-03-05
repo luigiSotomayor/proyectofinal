@@ -9,19 +9,20 @@ const EditUser = () => {
   const token = localStorage.getItem("token");
   const { register, handleSubmit, reset } = useForm();
 
+  const loadUsersList = async () => {
+    try {
+      const usersList = await fetch("http://localhost:3000/api/v1/user", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.json())
+        .then((data) => setUsers(data));
+    } catch (error) {
+      console.error("Error al cargar usuarios:", error);
+    }
+  };
+
   // Cargar usuarios al montar
   useEffect(() => {
-    const loadUsersList = async () => {
-      try {
-        const usersList = await fetch("http://localhost:3000/api/v1/user", {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-          .then((res) => res.json())
-          .then((data) => setUsers(data));
-      } catch (error) {
-        console.error("Error al cargar usuarios:", error);
-      }
-    };
     loadUsersList();
   }, []);
 
@@ -55,7 +56,7 @@ const EditUser = () => {
       if (!response.ok) {
         throw new Error("Error al crear usuario");
       }
-      console.log("Usuario creado:", await response.json());
+      await loadUsersList();
       alert("Usuario creado");
     }
     if (state === "edit") {
@@ -68,6 +69,7 @@ const EditUser = () => {
         body: JSON.stringify(data),
       });
 
+      await loadUsersList();
       alert("Usuario actualizado");
     }
   };
