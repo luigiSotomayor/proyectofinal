@@ -6,12 +6,22 @@ import crypto from "crypto";
 
 const getUsers = async (req, res, next) => {
   try {
-    const users = await User.find();
+    const users = await User.find().sort({ lastName: 1 });
     return res.status(200).json(users);
   } catch (error) {
     return res.status(400).json("Error al obtener los usuarios");
   }
 };
+
+const getUsersByRole = async (req, res, next) => {
+  try {
+    const { role } = req.params;
+    const usersByRole = await User.find({ role }).sort({ lastName: 1 });
+    return res.status(200).json(usersByRole);
+  } catch (error) {
+    return res.status(400).json("Error al obtener los usuarios por rol", error);
+  }
+} 
 
 const getUser = async (req, res, next) => {
     try {
@@ -46,14 +56,12 @@ const login = async (req, res, next) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
-      console.log("Usuario no encontrado");
       return res.status(400).json("Los datos introducidos no son correctos");
     }
     if (bcrypt.compareSync(password, user.password)) {
       const token = generateSign(user._id);
       return res.status(200).json({ token, user });
     } else {
-      console.log("Contraseña incorrecta");
       return res.status(400).json("Los datos introducidos no son correctos");
     }
   } catch (error) {
@@ -88,6 +96,7 @@ const deleteUser = async (req, res, next) => {
 
 export {
     getUsers,
+    getUsersByRole,
     getUser,
     postUser,
     updateUser,

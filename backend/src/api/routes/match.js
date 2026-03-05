@@ -4,6 +4,7 @@ import hasRole from '../../middlewares/hasRole.js';
 import canAccessTeam from '../../middlewares/canAccessTeam.js';
 import canAccessMatchTeam from '../../middlewares/canAccessMatchTeam.js';
 import canAccessUpdateTeam from '../../middlewares/canAccessUpdateTeam.js';
+import canAccessUpdateMatch from '../../middlewares/canAccessUpdateMatch.js';
 
 import express from 'express';
 const matchRouter = express.Router();
@@ -11,8 +12,8 @@ const matchRouter = express.Router();
 matchRouter.get("/", isAuth, hasRole(["director deportivo"]), getMatches);
 matchRouter.get("/team/:teamId", isAuth, getMatchesByTeam);
 matchRouter.get("/:id", isAuth, canAccessMatchTeam, getMatch);
-matchRouter.post("/", isAuth, hasRole(["director deportivo"]), postMatch);
-matchRouter.put("/:id", isAuth, canAccessUpdateTeam, updateMatch);
+matchRouter.post("/", isAuth, hasRole(["director deportivo", "entrenador"]), postMatch);
+matchRouter.put("/:id", isAuth, canAccessUpdateMatch, updateMatch);
 matchRouter.delete("/:id", isAuth, hasRole(["director deportivo"]), deleteMatch);
 
 export default matchRouter;

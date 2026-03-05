@@ -55,8 +55,6 @@ const Login = () => {
 
           throw new Error(data.message || "Error en la petición");
         }
-        //localStorage.setItem("token", data.token);
-        //localStorage.setItem("userId", data.user._id);
         login(data.user, data.token);
         navigate("/infodisplay");
 

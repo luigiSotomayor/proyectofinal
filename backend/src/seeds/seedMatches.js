@@ -26,7 +26,6 @@ export const seedMatches = async (teamsMap) => {
           championship: row.championship,
           stats: [],
         });
-        console.log("[" + row.team + "]");
       })
       .on("end", async () => {
         const created = await Match.insertMany(matches);

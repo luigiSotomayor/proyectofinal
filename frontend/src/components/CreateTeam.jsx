@@ -1,43 +1,173 @@
-import React from 'react'
+import React, { use } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 const CreateTeam = () => {
+  const [teams, setTeams] = useState([]);
+  const [players, setPlayers] = useState([]);
+  const [coaches, setCoaches] = useState([]);
+  const [selectedId, setSelectedId] = useState("");
+  const [state, setState] = useState("create");
   const { register, handleSubmit, reset } = useForm();
   const token = localStorage.getItem("token");
 
-  const onSubmit = async (data) => {
+  const loadTeamsList = async () => {
     try {
+      const listPlayers = await fetch(
+        "http://localhost:3000/api/v1/user/role/jugador",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      )
+        .then((res) => res.json())
+        .then((data) => setPlayers(data));
+
+      const listCoaches = await fetch(
+        "http://localhost:3000/api/v1/user/role/entrenador",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      )
+        .then((res) => res.json())
+        .then((data) => setCoaches(data));
+
+      const teamsList = await fetch("http://localhost:3000/api/v1/team", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.json())
+        .then((data) => setTeams(data));
+    } catch (error) {
+      console.error("Error al cargar equipos:", error);
+    }
+  };
+
+  useEffect(() => {
+    loadTeamsList();
+  }, []);
+
+  useEffect(() => {
+    if (!selectedId) return;
+
+    const teamSelected = teams.find((t) => t._id === selectedId);
+    if (teamSelected) {
+      setState("edit");
+      reset({
+        name: teamSelected.name,
+        coach: teamSelected.coach?._id || teamSelected.coach,
+        players: teamSelected.players?.map((p) =>
+          typeof p === "object" ? p._id : p,
+        ),
+      });
+    }
+  }, [selectedId, teams, reset]);
+
+  const onSubmit = async (data) => {
+    if (state === "create") {
       const response = await fetch("http://localhost:3000/api/v1/team", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(data),
       });
-      console.log("Respuesta del servidor:", response);
+      const newTeam = await response.json();
+      setTeams((prev) => [...prev, newTeam]);
       if (!response.ok) {
         throw new Error("Error al crear equipo");
       }
-
-      const result = await response.json();
-      console.log("Equipo creado:", result);
-      reset();
-    } catch (error) {
-      console.error(error);
+      await loadTeamsList();
+      alert("Equipo creado");
     }
+    if (state === "edit") {
+      await fetch(`http://localhost:3000/api/v1/team/${selectedId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      });
+      alert("Equipo actualizado");
+    }
+  };
+
+  const handleDelete = async () => {
+    await fetch(`http://localhost:3000/api/v1/team/${selectedId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    setTeams(teams.filter((t) => t._id !== selectedId));
+    setSelectedId("");
+    reset();
+    alert("Equipo eliminado");
   };
 
   return (
     <div className="create-team">
-      <h2>Crear Equipo</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("name")} placeholder="Nombre del equipo" />
-        <input {...register("coach")} placeholder="Entrenador" />
-        <button type="submit">Crear Equipo</button>
-      </form>
-    </div>
-  )
-}
+      <select
+        value={selectedId}
+        onChange={(e) => setSelectedId(e.target.value)}
+      >
+        <option value="">Crear nuevo equipo</option>
+        {teams.map((team) => (
+          <option key={team._id} value={team._id}>
+            {team.name}
+          </option>
+        ))}
+      </select>
+      {state === "edit" && (
+        <button
+          type="button"
+          onClick={() => {
+            setState("create");
+            setSelectedId("");
+            reset({
+              name: "",
+            });
+          }}
+        >
+          Crear nuevo equipo
+        </button>
+      )}
 
-export default CreateTeam
+      {state && (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <label>Nombre: </label>
+          <input {...register("name")} />
+          <label>Selecciona el entrenador: </label>
+          <select {...register("coach")}>
+            <option value="">Selecciona entrenador</option>
+            {coaches.map((coach) => (
+              <option key={coach._id} value={coach._id}>
+                {coach.lastName}, {coach.firstName}
+              </option>
+            ))}
+          </select>
+          <label>Selecciona los jugadores: </label>
+          {players.map((player) => (
+            <div key={player._id}>
+              <input
+                type="checkbox"
+                value={player._id}
+                {...register("players")}
+              />
+              {player.lastName}, {player.firstName}
+            </div>
+          ))}
+          <button type="submit">
+            {state === "create" ? "Crear equipo" : "Guardar cambios"}
+          </button>
+          <button type="button" onClick={handleDelete}>
+            Borrar equipo
+          </button>
+        </form>
+      )}
+    </div>
+  );
+};
+
+export default CreateTeam;

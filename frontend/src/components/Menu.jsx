@@ -1,5 +1,6 @@
 import Button from "./Button.jsx";
 import { useAuth } from "../context/AuthContext";
+import { useMatch } from "../context/MatchContext.jsx";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { apiFetch } from "../utils/apiFetch.js";
@@ -7,15 +8,17 @@ import "../styles/Menu.css";
 import { formatDate } from "../utils/formatDate.js";
 import InfoData from "./InfoData.jsx";
 
-const Menu = ({ setMode, setSelectedMatch }) => {
+const Menu = ({ setMode }) => {
   const { logout, user } = useAuth();
+  const { selectedMatch, setSelectedMatch, matches, setMatches } = useMatch();
   const navigate = useNavigate();
   const [teamOfPlayer, setTeamOfPlayer] = useState({});
   const [teamMister, setTeamMister] = useState([{}]);
-  const [matchesTeam, setMatchesTeam] = useState([]);
+  /* const [matchesTeam, setMatchesTeam] = useState([]); */
   const [allMatches, setAllMatches] = useState([]);
   const [openId, setOpenId] = useState(null);
   const [allTeams, setAllTeams] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const loadMatches = async () => {
@@ -36,10 +39,14 @@ const Menu = ({ setMode, setSelectedMatch }) => {
             `http://localhost:3000/api/v1/team/coach/${user._id}`,
           );
           setTeamMister(teamMisterReq);
-          const matchesTeamMisterReq = await apiFetch(
-            `http://localhost:3000/api/v1/match/team/${teamMisterReq[0]._id}`,
-          );
-          setMatchesTeam(matchesTeamMisterReq);
+          let allMatches = [];
+          for (const team of teamMisterReq) {
+            const matches = await apiFetch(
+              `http://localhost:3000/api/v1/match/team/${team._id}`,
+            );
+            allMatches = [...allMatches, ...matches];
+          }
+          setMatches(allMatches);
         }
 
         if (user?.role === "jugador") {
@@ -50,7 +57,7 @@ const Menu = ({ setMode, setSelectedMatch }) => {
           const matchesTeamReq = await apiFetch(
             `http://localhost:3000/api/v1/match/team/${teamReq._id}`,
           );
-          setMatchesTeam(matchesTeamReq);
+          setMatches(matchesTeamReq);
         }
       } catch (error) {
         console.error(error);
@@ -58,7 +65,11 @@ const Menu = ({ setMode, setSelectedMatch }) => {
     };
 
     loadMatches();
-  }, []);
+  }, [refresh]);
+
+  const handleSelectMatch = (match) => {
+    setSelectedMatch(match);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -67,6 +78,7 @@ const Menu = ({ setMode, setSelectedMatch }) => {
   };
 
   const toggleItem = (id) => {
+    setRefresh((prev) => !prev);
     setOpenId(openId === id ? null : id);
   };
 
@@ -77,18 +89,12 @@ const Menu = ({ setMode, setSelectedMatch }) => {
       </section>
       {user.role === "director deportivo" && (
         <section className="opciones">
-          <h3>Gestión de usuarios</h3>
-          <ul className="gestion-usuarios ulist-menu">
-            <li className="itemHover" onClick={() => setMode("usercreate")}>Altas</li>
-            <li className="itemHover" onClick={() => setMode("userdelete")}>Bajas</li>
-            <li className="itemHover" onClick={() => setMode("useredit")}>Editar usuario</li>
-          </ul>
-          <h3>Gestión de equipos</h3>
-          <ul className="gestion-equipos ulist-menu">
-            <li className="itemHover" onClick={() => setMode("teamcreate")}>Altas</li>
-            <li className="itemHover" onClick={() => setMode("teamdelete")}>Bajas</li>
-            <li className="itemHover" onClick={() => setMode("teamedit")}>Editar</li>
-          </ul>
+          <h3 className="itemHover" onClick={() => setMode("usersdisplay")}>
+            Gestión de usuarios
+          </h3>
+          <h3 className="itemHover" onClick={() => setMode("teamsdisplay")}>
+            Gestión de equipos
+          </h3>
           <h3>Partidos</h3>
           <ul className="matches-list">
             {allTeams.map((team) => (
@@ -107,10 +113,13 @@ const Menu = ({ setMode, setSelectedMatch }) => {
                       .map((match) => (
                         <li
                           key={match._id}
-                          onClick={() => (setSelectedMatch(match), setMode("matchdetails"))}
+                          onClick={() => (
+                            setSelectedMatch(match),
+                            setMode("matchdetails")
+                          )}
                           className="match-item itemHover"
                         >
-                          {match.team.name} - {formatDate(match.date)}
+                          {match.rival} - {formatDate(match.date)}
                         </li>
                       ))}
                   </ul>
@@ -122,7 +131,9 @@ const Menu = ({ setMode, setSelectedMatch }) => {
       )}
       {user.role === "entrenador" && (
         <section className="equipos">
-          <h3 className="addMatch" onClick={() => setMode("creatematch")}>Añadir partido</h3>
+          <h3 className="addMatch" onClick={() => setMode("creatematch")}>
+            Añadir partido
+          </h3>
           <h3>Partidos</h3>
           <ul className="list-teamMister">
             {teamMister.map((team) => (
@@ -135,13 +146,16 @@ const Menu = ({ setMode, setSelectedMatch }) => {
                 </div>
                 {openId === team._id && (
                   <ul className="submenu">
-                    {matchesTeam
+                    {matches
                       .filter((match) => match.team._id === team._id)
                       .map((match) => (
                         <li
                           className="matchByTeam itemHover"
                           key={match._id}
-                          onClick={() => (setSelectedMatch(match), setMode("matchdetails"))}
+                          onClick={() => (
+                            setSelectedMatch(match),
+                            setMode("editmatchdetails")
+                          )}
                         >
                           {match.rival} - {formatDate(match.date)}
                         </li>
@@ -157,10 +171,13 @@ const Menu = ({ setMode, setSelectedMatch }) => {
         <section className="partidos">
           <h3>{teamOfPlayer.name}</h3>
           <ul className="matches-list">
-            {matchesTeam.map((match) => (
+            {matches.map((match) => (
               <li
                 key={match._id}
-                onClick={() => (setSelectedMatch(match), setMode("matchdetails"))}
+                onClick={() => (
+                  setSelectedMatch(match),
+                  setMode("matchdetails")
+                )}
                 className="match-item"
               >
                 {match.rival} - {formatDate(match.date)}

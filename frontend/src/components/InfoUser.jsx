@@ -13,7 +13,7 @@ const InfoUser = () => {
       try {
         if (user?.role === "jugador") {
           const teamReq = await apiFetch(
-            `http://localhost:3000/api/v1/team/team/${user._id}`,
+            `http://localhost:3000/api/v1/team/user/${user._id}`,
           );
           setTeamOfPlayer(teamReq);
         }
