@@ -7,7 +7,7 @@ import { apiFetch } from "../utils/apiFetch.js";
 const EditMatchDetails = ({ match }) => {
   const token = localStorage.getItem("token");
   const [teamPlayers, setTeamPlayers] = useState([]);
-  const { register, handleSubmit, setValue } = useForm();
+  const { register, handleSubmit, setValue, reset } = useForm();
 
   useEffect(() => {
     if (match?.stats) {
@@ -52,8 +52,16 @@ const EditMatchDetails = ({ match }) => {
         rating: stat?.rating || 0,
       };
     });
-    setValue("stats", initialStats);
-  }, [teamPlayers, setValue]);
+
+    reset({
+      rival: match.rival,
+      date: match.date?.slice(0, 10),
+      home: match.home,
+      championship: match.championship,
+      jornada: match.jornada,
+      stats: initialStats,
+    });
+  }, [teamPlayers, match, reset]);
 
   const onSubmit = async (data) => {
     try {
@@ -65,13 +73,20 @@ const EditMatchDetails = ({ match }) => {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ stats: data.stats }),
+          body: JSON.stringify({
+              rival: data.rival,
+              date: data.date,
+              home: data.home,
+              championship: data.championship,
+              jornada: data.jornada,
+              stats: data.stats,
+          }),
         },
       );
 
-      if (!response.ok) throw new Error("Error guardando stats");
+      if (!response.ok) throw new Error("Error guardando partido");
 
-      alert("Estadísticas guardadas correctamente");
+      alert("Partido actualizado correctamente");
     } catch (error) {
       console.error(error);
     }
@@ -82,13 +97,35 @@ const EditMatchDetails = ({ match }) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>{match.team.name}</div>
         <div>
-          <p>Rival: {match.rival}</p>
-          <p>Fecha: {formatDate(match.date)}</p>
-          <p>Campo: {match.home ? "Local" : "Visitante"}</p>
+          <label>Rival:</label>
+          <input {...register("rival")} />
         </div>
+
         <div>
-          <p>Campeonato: {match.championship}</p>
-          <p>Jornada: {match.jornada}</p>
+          <label>Fecha:</label>
+          <input type="date" {...register("date")} />
+        </div>
+
+        <div>
+          <label>Campo:</label>
+          <select {...register("home")}>
+            <option value={true}>Local</option>
+            <option value={false}>Visitante</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Campeonato:</label>
+          <select {...register("championship")}>
+            <option value={"liga"}>Liga</option>
+            <option value={"copa"}>Copa</option>
+            <option value={"amistoso"}>Amistoso</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Jornada:</label>
+          <input type="number" {...register("jornada")} />
         </div>
 
         <table className="match-stats-table">

@@ -45,9 +45,7 @@ const postMatch = async (req, res, next) => {
 const updateMatch = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const newMatch = new Match(req.body);
-    newMatch._id = id;
-    const matchUpdated = await Match.findByIdAndUpdate(id, newMatch, {
+    const matchUpdated = await Match.findByIdAndUpdate(id, req.body, {
       new: true,
     });
     return res.status(200).json(matchUpdated);
