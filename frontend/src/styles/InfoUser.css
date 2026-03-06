@@ -1,0 +1,32 @@
+.user-section {
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    font-size: xx-large;
+    font-weight: 900;
+}
+
+.role-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.subsection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.labelData {
+    color: blue;
+    margin: 5px;
+    font-weight: bold;
+}
+
+.valueData {
+    margin: 5px;
+    color: black;
+}

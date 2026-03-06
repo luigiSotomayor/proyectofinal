@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext.jsx";
 import { formatDate } from "../utils/formatDate.js";
 import { useState, useEffect } from "react";
 import { apiFetch } from "../utils/apiFetch.js";
+import "../styles/InfoUser.css";
 
 const InfoUser = () => {
   const [teamOfPlayer, setTeamOfPlayer] = useState({});
@@ -28,24 +29,52 @@ const InfoUser = () => {
   }, [user]);
 
   return (
-    <div>
-      <h1>
+    <div className="user-section">
+      <h1 className="nameTitle">
         {user?.firstName} {user?.lastName}
       </h1>
       {user?.role === "jugador" && (
-        <>
-          <h4>Equipo: {teamOfPlayer.name}</h4>
-          <h4>
-            Posición: {user?.position} Dorsal: {user?.dorsal}
-          </h4>
-        </>
+        <div className="role-section">
+          <section className="role-subsection subsection">
+            <h4 className="labelData">Equipo:</h4>
+            <p className="valueData">{teamOfPlayer.name}</p>
+          </section>
+          <section className="role-subsection subsection">
+            <h4 className="labelData">Posición:</h4>{" "}
+            <p className="valueData">{user?.position}</p>{" "}
+            <h4 className="labelData">Dorsal:</h4>{" "}
+            <p className="valueData">{user?.dorsal}</p>
+          </section>
+        </div>
       )}
-      {user?.role === "entrenador" && <h4>Puesto: Entrenador</h4>}
-      {user?.role === "director deportivo" && <h4>Puesto: Director Deportivo</h4>}
-      <h4>Fecha nacimiento: {formatDate(user?.birthday)}</h4>
-      <h4>Teléfono: {user?.phone}</h4>
-      <h4>Email: {user?.email}</h4>
-      <h4>País: {user?.nationality}</h4>
+      {user?.role === "entrenador" && (
+        <div className="role-section subsection">
+          <h4 className="labelData">Puesto:</h4>{" "}
+          <p className="valueData">Entrenador</p>
+        </div>
+      )}
+      {user?.role === "director deportivo" && (
+        <div className="role-section subsection">
+          <h4 className="labelData">Puesto:</h4>{" "}
+          <p className="valueData">Director deportivo</p>
+        </div>
+      )}
+      <section className="birthday-subsection subsection">
+        <h4 className="labelData">Fecha nacimiento:</h4>{" "}
+        <p className="valueData">{formatDate(user?.birthday)}</p>
+      </section>
+      <section className="phone-subsection subsection">
+        <h4 className="labelData">Teléfono:</h4>{" "}
+        <p className="valueData">{user?.phone}</p>
+      </section>
+      <section className="mail-subsection subsection">
+        <h4 className="labelData">Email:</h4>{" "}
+        <p className="valueData">{user?.email}</p>
+      </section>
+      <section className="country-subsection subsection">
+        <h4 className="labelData">País:</h4>{" "}
+        <p className="valueData">{user?.nationality}</p>
+      </section>
     </div>
   );
 };
