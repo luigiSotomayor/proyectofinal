@@ -1,0 +1,18 @@
+.form-create-match {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.section-create-match {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+}
+
+.button-create-match {
+    display: flex;
+    justify-content: center;
+    margin: 10px auto;
+}

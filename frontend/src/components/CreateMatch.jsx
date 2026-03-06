@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useForm } from "react-hook-form";
+import "../styles/CreateMatch.css";
+import Button from "./Button.jsx";
 
 const CreateMatch = () => {
   const [teamsMister, setTeamsMister] = useState([]);
@@ -43,31 +45,42 @@ const CreateMatch = () => {
 
   return (
     <>
-      <div>Elija el equipo del que quiere generar un partido nuevo: </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label>Equipo: </label>
-        <select {...register("team")}>
-          <option value="">Elige un equipo</option>
-          {teamsMister.map((team) => (
-            <option key={team._id} value={team._id}>
-              {team.name}
-            </option>
-          ))}
-        </select>
-        <label>Fecha: </label>
-        <input {...register("date")} type="date" />
-        <label>Campeonato: </label>
-        <select {...register("championship")}>
-          <option value="">Elige una competición</option>
-          <option value="liga">Liga</option>
-          <option value="copa">Copa</option>
-          <option value="amistoso">Amistoso</option>
-        </select>
-        <label>Jornada: </label>
-        <input {...register("jornada")} />
-        <label>Rival: </label>
-        <input {...register("rival")} />
-        <button type="submit">Guardar partido</button>
+      <p>
+        Elija el equipo del que quiere generar un partido nuevo y complete los
+        datos requeridos.
+      </p>
+      <form className="form-create-match" onSubmit={handleSubmit(onSubmit)}>
+        <section className="section-create-match">
+          <label>Equipo: </label>
+          <select {...register("team")}>
+            <option value="">Elige un equipo</option>
+            {teamsMister.map((team) => (
+              <option key={team._id} value={team._id}>
+                {team.name}
+              </option>
+            ))}
+          </select>
+        </section>
+        <section className="section-create-match">
+          <label>Rival: </label>
+          <input {...register("rival")} />
+          <label>Fecha: </label>
+          <input {...register("date")} type="date" />
+        </section>
+        <section className="section-create-match">
+          <label>Campeonato: </label>
+          <select {...register("championship")}>
+            <option value="">Elige una competición</option>
+            <option value="liga">Liga</option>
+            <option value="copa">Copa</option>
+            <option value="amistoso">Amistoso</option>
+          </select>
+          <label>Jornada: </label>
+          <input {...register("jornada")} />
+        </section>
+        <section className="button-create-match">
+          <Button type="submit" text="Guardar" />
+        </section>
       </form>
     </>
   );
