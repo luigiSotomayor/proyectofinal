@@ -1,6 +1,7 @@
 import React, { use } from "react";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import Button from "./Button.jsx";
 import "../styles/CreateTeam.css";
 
@@ -40,6 +41,11 @@ const CreateTeam = () => {
         .then((data) => setTeams(data));
     } catch (error) {
       console.error("Error al cargar equipos:", error);
+      toast.error("Hubo un problema al cargar los equipos.", {
+        position: "top-center",
+        autoClose: 4000,
+        theme: "colored",
+      });
     }
   };
 
@@ -79,7 +85,11 @@ const CreateTeam = () => {
         throw new Error("Error al crear equipo");
       }
       await loadTeamsList();
-      alert("Equipo creado");
+      toast.info("Equipo creado con éxito.", {
+        position: "top-center",
+        autoClose: 4000,
+        theme: "colored",
+      });
     }
     if (state === "edit") {
       await fetch(`http://localhost:3000/api/v1/team/${selectedId}`, {
@@ -90,7 +100,11 @@ const CreateTeam = () => {
         },
         body: JSON.stringify(data),
       });
-      alert("Equipo actualizado");
+      toast.info("Equipo actualizado con éxito.", {
+        position: "top-center",
+        autoClose: 4000,
+        theme: "colored",
+      });
     }
   };
 
@@ -105,7 +119,11 @@ const CreateTeam = () => {
     setTeams(teams.filter((t) => t._id !== selectedId));
     setSelectedId("");
     reset();
-    alert("Equipo eliminado");
+    toast.info("Equipo borrado con éxito.", {
+        position: "top-center",
+        autoClose: 4000,
+        theme: "colored",
+      });
   };
 
   const buttonCreateTeam = (e) => {
@@ -162,7 +180,7 @@ const CreateTeam = () => {
           </section>
           <section className="form-subsection subsection-b">
             <label>Selecciona los jugadores: </label>
-            <hr className="line"/>
+            <hr className="line" />
           </section>
           <section className="form-subsection subsection-c">
             {players.map((player) => (

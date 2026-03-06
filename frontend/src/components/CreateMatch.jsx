@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import "../styles/CreateMatch.css";
 import Button from "./Button.jsx";
 
@@ -37,9 +38,18 @@ const CreateMatch = () => {
       });
       reset();
       await loadTeamsByCoach();
-      alert("Partido creado");
+      toast.info("Partido creado con éxito", {
+        position: "top-center",
+        autoClose: 4000,
+        theme: "colored",
+      });
     } catch (error) {
       console.error("Error al cargarse los partidos", error);
+      toast.error("Error al crear el partido.", {
+        position: "top-center",
+        autoClose: 4000,
+        theme: "colored",
+      });
     }
   };
 

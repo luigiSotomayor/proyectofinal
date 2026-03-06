@@ -2,6 +2,9 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { apiFetch } from "../utils/apiFetch.js";
 import { useMatch } from "../context/MatchContext.jsx";
+import { toast } from "react-toastify";
+import "../styles/EditMatchDetails.css";
+import Button from "./Button.jsx";
 
 const EditMatchDetails = () => {
   const { setSelectedMatch, selectedMatch, setMatches, matches } = useMatch();
@@ -9,7 +12,6 @@ const EditMatchDetails = () => {
 
   const [teamPlayers, setTeamPlayers] = useState([]);
   const { register, handleSubmit, setValue, reset } = useForm();
-  /* const [refresh, setRefresh] = useState(false); */
 
   useEffect(() => {
     const loadPlayers = async () => {
@@ -88,7 +90,11 @@ const EditMatchDetails = () => {
       setMatches((prev) =>
         prev.map((m) => (m._id === newMatch._id ? newMatch : m)),
       );
-      alert("Partido actualizado correctamente");
+      toast.info("Partido actualizado con éxito.", {
+        position: "top-center",
+        autoClose: 4000,
+        theme: "colored",
+      });
     } catch (error) {
       console.error(error);
     }
@@ -96,39 +102,29 @@ const EditMatchDetails = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>{selectedMatch.team.name}</div>
-        <div>
+      <section className="team-name">{selectedMatch.team.name}</section>
+      <form className="form-edit-match" onSubmit={handleSubmit(onSubmit)}>
+        <section className="section-edit-match">
           <label>Rival:</label>
           <input {...register("rival")} />
-        </div>
-
-        <div>
           <label>Fecha:</label>
           <input type="date" {...register("date")} />
-        </div>
-
-        <div>
+        </section>
+        <section className="section-edit-match">
           <label>Campo:</label>
           <select {...register("home", { setValueAs: (v) => v === "true" })}>
             <option value="true">Local</option>
             <option value="false">Visitante</option>
           </select>
-        </div>
-
-        <div>
           <label>Campeonato:</label>
           <select {...register("championship")}>
             <option value={"liga"}>Liga</option>
             <option value={"copa"}>Copa</option>
             <option value={"amistoso"}>Amistoso</option>
           </select>
-        </div>
-
-        <div>
           <label>Jornada:</label>
           <input type="number" {...register("jornada")} />
-        </div>
+        </section>
 
         <table className="match-stats-table">
           <thead>
@@ -229,8 +225,9 @@ const EditMatchDetails = () => {
             ))}
           </tbody>
         </table>
-
-        <button type="submit">Guardar estadísticas</button>
+        <section className="button-edit-match">
+          <Button type="submit" text="Guardar" />
+        </section>
       </form>
     </>
   );

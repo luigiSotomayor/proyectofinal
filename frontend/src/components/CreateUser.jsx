@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import "../styles/CreateUser.css";
+import { toast } from "react-toastify";
 import Button from "./Button.jsx";
 
 const EditUser = () => {
@@ -19,6 +20,11 @@ const EditUser = () => {
         .then((data) => setUsers(data));
     } catch (error) {
       console.error("Error al cargar usuarios:", error);
+      toast.error("Error al cargar los usuarios.", {
+        position: "top-center",
+        autoClose: 4000,
+        theme: "colored",
+      });
     }
   };
 
@@ -58,7 +64,11 @@ const EditUser = () => {
         throw new Error("Error al crear usuario");
       }
       await loadUsersList();
-      alert("Usuario creado");
+      toast.info("Usuario creado con éxito.", {
+        position: "top-center",
+        autoClose: 4000,
+        theme: "colored",
+      });
     }
     if (state === "edit") {
       await fetch(`http://localhost:3000/api/v1/user/${selectedId}`, {
@@ -71,7 +81,11 @@ const EditUser = () => {
       });
 
       await loadUsersList();
-      alert("Usuario actualizado");
+      toast.info("Usuario actualizado con éxito.", {
+        position: "top-center",
+        autoClose: 4000,
+        theme: "colored",
+      });
     }
   };
 
@@ -87,7 +101,11 @@ const EditUser = () => {
     setUsers(users.filter((u) => u._id !== selectedId));
     setSelectedId("");
     reset();
-    alert("Usuario eliminado");
+    toast.info("Usuario borrado con éxito.", {
+      position: "top-center",
+      autoClose: 4000,
+      theme: "colored",
+    });
   };
 
   const buttonCreateUser = (e) => {

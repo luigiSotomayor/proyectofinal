@@ -60,6 +60,11 @@ const Menu = ({ setMode }) => {
         }
       } catch (error) {
         console.error(error);
+        toast.error("Error al cargar los datos.", {
+          position: "top-center",
+          autoClose: 4000,
+          theme: "colored",
+        });
       }
     };
 
@@ -88,14 +93,20 @@ const Menu = ({ setMode }) => {
       </section>
       {user.role === "director deportivo" && (
         <section className="opciones">
-          <h3 className="itemHover" onClick={() => setMode("usersdisplay")}>
+          <h3
+            className="itemHover titles-h3"
+            onClick={() => setMode("usersdisplay")}
+          >
             Gestión de usuarios
           </h3>
-          <h3 className="itemHover" onClick={() => setMode("teamsdisplay")}>
+          <h3
+            className="itemHover titles-h3"
+            onClick={() => setMode("teamsdisplay")}
+          >
             Gestión de equipos
           </h3>
-          <h3>Partidos</h3>
-          <ul className="matches-list">
+          <h3 className="titles-h3">Partidos</h3>
+          <ul className="list-team">
             {allTeams.map((team) => (
               <li key={team._id} className="itemH">
                 <div
@@ -106,7 +117,7 @@ const Menu = ({ setMode }) => {
                 </div>
 
                 {openId === team._id && (
-                  <ul className="submenu">
+                  <ul className="matches-list">
                     {allMatches
                       .filter((match) => match.team._id === team._id)
                       .map((match) => (
@@ -130,26 +141,29 @@ const Menu = ({ setMode }) => {
       )}
       {user.role === "entrenador" && (
         <section className="equipos">
-          <h3 className="addMatch" onClick={() => setMode("creatematch")}>
+          <h3
+            className="addMatch itemHover titles-h3"
+            onClick={() => setMode("creatematch")}
+          >
             Añadir partido
           </h3>
-          <h3>Partidos</h3>
-          <ul className="list-teamMister">
+          <h3 className="titles-h3">Partidos</h3>
+          <ul className="list-team">
             {teamMister.map((team) => (
               <li key={team._id} className="teams">
-                <div
+                <section
                   onClick={() => toggleItem(team._id)}
                   className="team-item itemHover"
                 >
                   {team.name}
-                </div>
+                </section>
                 {openId === team._id && (
-                  <ul className="submenu">
+                  <ul className="matches-list">
                     {matches
                       .filter((match) => match.team._id === team._id)
                       .map((match) => (
                         <li
-                          className="matchByTeam itemHover"
+                          className="match-item itemHover"
                           key={match._id}
                           onClick={() => (
                             setSelectedMatch(match),
@@ -168,7 +182,7 @@ const Menu = ({ setMode }) => {
       )}
       {user.role === "jugador" && (
         <section className="partidos">
-          <h3>{teamOfPlayer.name}</h3>
+          <h3 className="titles-h3">{teamOfPlayer.name}</h3>
           <ul className="matches-list">
             {matches.map((match) => (
               <li
@@ -177,7 +191,7 @@ const Menu = ({ setMode }) => {
                   setSelectedMatch(match),
                   setMode("matchdetails")
                 )}
-                className="match-item"
+                className="match-item itemHover"
               >
                 {match.rival} - {formatDate(match.date)}
               </li>

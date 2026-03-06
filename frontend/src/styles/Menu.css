@@ -2,8 +2,34 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    padding: 20px;
+    padding: 8px;
     background-color: rgba(127, 255, 212, 0.3);
+}
+
+.logout {
+    margin: 10px auto;
+}
+
+.titles-h3 {
+    margin: 7px;
+    font-size: medium;
+}
+
+.itemHover:hover {
+    cursor: pointer;
+    background-color: var(--official-Color-Stenella);
+    color: whitesmoke;
+}
+
+.list-team {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.team-item {
+    font-size: medium;
+    font-weight: 300;
 }
 
 .matches-list {
@@ -16,31 +42,25 @@
     cursor: pointer;
     padding: 5px;
     border-bottom: 1px solid #ccc;
+    font-size: small;
 }
+
+/* 
+
+
+
 
 .match-item:hover {
     background-color: var(--official-Color-Stenella);
     color: whitesmoke;
 }
 
-.itemHover:hover {
-    cursor: pointer;
-    background-color: var(--official-Color-Stenella);
-    color: whitesmoke;
-}
 
-.ulist-menu {
-    list-style: none;
-    padding: 5px 10px;
-    margin: 5px;
-}
 
+
+ 
 .opciones h4{
     margin: 3px 0;
-}
-
-.logout {
-    margin: 10px auto;
 }
 
 .addMatch:hover {
@@ -61,21 +81,13 @@
     margin: 0;
 }
 
-.equipos h3{
-    margin: 7px 10px
-}
+
 
 .teams {
     cursor: pointer;
     list-style: none;
+    font-size: small;
 }
-
-/* .teams:hover {
-    background-color: var(--official-Color-Stenella);
-    color: whitesmoke;
-    padding: 7px 10px;
-    border-radius: 8px;
-} */
 
 .matchByTeam:hover {
     background-color: var(--official-Color-Stenella);
@@ -85,4 +97,4 @@
 
 .submenu {
     list-style: none;
-}
+} */

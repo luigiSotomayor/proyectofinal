@@ -19,7 +19,6 @@ const getMatchesByTeam = async (req, res, next) => {
     const matches = await Match.find({ team: teamId })
       .populate("team")
       .populate("stats.player");
-
     return res.status(200).json(matches);
   } catch (error) {
     console.log(error);
