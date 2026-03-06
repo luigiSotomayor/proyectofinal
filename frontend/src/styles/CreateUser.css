@@ -8,6 +8,7 @@
     flex-direction: row;
     gap: 30px;
     align-items: center;
+    margin: 5px auto 10px 10px;
 }
 
 .select-user-section {
@@ -15,19 +16,29 @@
     max-height: 20px;
 }
 
-.form-section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 10px 0px;
-    gap: 8px;
+.form-section-noButton {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+@media (max-width: 730px) {
+    .form-section-noButton{
+        grid-template-columns: 1fr;
+    }
 }
 
 .subsection-form {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: max-content 1fr;
     align-items: center;
     gap: 8px;
+}
+
+.subsection-form label {
+    white-space: nowrap;
 }
 
 .button-form {

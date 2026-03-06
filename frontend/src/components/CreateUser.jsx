@@ -134,53 +134,57 @@ const EditUser = () => {
 
       {state && (
         <form className="form-section" onSubmit={handleSubmit(onSubmit)}>
-          <section className="subsection-1 subsection-form">
-            <label>Nombre: </label>
-            <input {...register("firstName")} />
-            <label>Apellidos: </label>
-            <input {...register("lastName")} />
-          </section>
-          <section className="subsection-2 subsection-form">
-            <label>Nación: </label>
-            <input {...register("nationality")} />
-            <label>Cumpleaños: </label>
-            <input {...register("birthday")} type="date" />
-          </section>
-          <section className="subsection-3 subsection-form">
-            <label>Email: </label>
-            <input {...register("email")} />
-            <label>Contraseña: </label>
-            <input {...register("password")} type="password" />
-          </section>
-          <section className="subsection-4 subsection-form">
-            <label>Teléfono: </label>
-            <input {...register("phone")} />
-            <label>Dorsal: </label>
-            <input {...register("dorsal")} />
-          </section>
-          <section className="subsection-5 subsection-form">
-            <label>Rol: </label>
-            <select {...register("role", { required: true })}>
-              <option value="">Seleccione: </option>
-              <option value="jugador">Jugador</option>
-              <option value="entrenador">Entrenador</option>
-              <option value="director deportivo">Director deportivo</option>
-            </select>
-            <label>Posición: </label>
-            <select {...register("position")}>
-              <option value="">Seleccione: </option>
-              <option value="portero">Portero</option>
-              <option value="central">Central</option>
-              <option value="lateral">Lateral</option>
-              <option value="medio centro">Medio centro</option>
-              <option value="extremo">Extremo</option>
-              <option value="media punta">Media punta</option>
-              <option value="delantero">Delantero</option>
-            </select>
-          </section>
+          <div className="form-section-noButton">
+            <section className="subsection-1 subsection-form">
+              <label>Nombre: </label>
+              <input {...register("firstName")} />
+              <label>Apellidos: </label>
+              <input {...register("lastName")} />
+            </section>
+            <section className="subsection-2 subsection-form">
+              <label>Nación: </label>
+              <input {...register("nationality")} />
+              <label>Cumpleaños: </label>
+              <input {...register("birthday")} type="date" />
+            </section>
+            <section className="subsection-3 subsection-form">
+              <label>Email: </label>
+              <input {...register("email")} />
+              <label>Contraseña: </label>
+              <input {...register("password")} type="password" />
+            </section>
+            <section className="subsection-4 subsection-form">
+              <label>Teléfono: </label>
+              <input {...register("phone")} />
+              <label>Dorsal: </label>
+              <input {...register("dorsal")} />
+            </section>
+            <section className="subsection-5 subsection-form">
+              <label>Rol: </label>
+              <select {...register("role", { required: true })}>
+                <option value="">Seleccione: </option>
+                <option value="jugador">Jugador</option>
+                <option value="entrenador">Entrenador</option>
+                <option value="director deportivo">Director deportivo</option>
+              </select>
+            </section>
+            <section className="subsection-6 subsection-form">
+              <label>Posición: </label>
+              <select {...register("position")}>
+                <option value="">Seleccione: </option>
+                <option value="portero">Portero</option>
+                <option value="central">Central</option>
+                <option value="lateral">Lateral</option>
+                <option value="medio centro">Medio centro</option>
+                <option value="extremo">Extremo</option>
+                <option value="media punta">Media punta</option>
+                <option value="delantero">Delantero</option>
+              </select>
+            </section>
+          </div>
           <section className="button-form">
-            <Button type="submit" text="Guardar"/>
-            <Button type="button" text="Borrar" onClick={handleDelete}/>
+            <Button type="submit" text="Guardar" />
+            <Button type="button" text="Borrar" onClick={handleDelete} />
           </section>
         </form>
       )}

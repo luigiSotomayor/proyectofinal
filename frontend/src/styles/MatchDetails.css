@@ -1,7 +1,23 @@
+.team-name {
+  font-size: xx-large;
+  font-weight: 900;
+}
+
+.match-data {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.table-title {
+  margin: 10px auto 4px 5px;
+}
+
 .match-stats-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .match-stats-table th,

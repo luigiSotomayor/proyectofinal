@@ -29,4 +29,5 @@ h1 {
 .valueData {
     margin: 5px;
     color: black;
+    font-weight: 500;
 }

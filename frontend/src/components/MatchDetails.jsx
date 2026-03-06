@@ -5,17 +5,17 @@ import "../styles/MatchDetails.css";
 const MatchDetails = ({ match }) => {
   return (
     <>
-      <div>{match.team.name}</div>
-      <div>
-        <p>Rival: {match.rival}</p>
-        <p>Fecha: {formatDate(match.date)}</p>
-        <p>Campo: {match.home === true ? "Local" : "Visitante"}</p>
-      </div>
-      <div>
-        <p>Campeonato: {match.championship}</p>
-        <p>Jornada: {match.jornada}</p>
-      </div>
-      <div>Estadísticas del partido: </div>
+      <section className="team-name">{match.team.name}</section>
+      <section className="primary-match-data match-data">
+        <p className="labelData">Rival: <span className="valueData">{match.rival}</span></p>
+        <p className="labelData">Fecha: <span className="valueData">{formatDate(match.date)}</span></p>
+      </section>
+      <section className="secundary-match-data match-data">
+        <p className="labelData">Campo: <span className="valueData">{match.home === true ? "Local" : "Visitante"}</span></p>
+        <p className="labelData">Campeonato: <span className="valueData">{match.championship}</span></p>
+        <p className="labelData">Jornada: <span className="valueData">{match.jornada}</span></p>
+      </section>
+      <section className="table-title">Estadísticas del partido: </section>
       <table className="match-stats-table">
         <thead>
           <tr>

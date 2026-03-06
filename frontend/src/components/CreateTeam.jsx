@@ -1,6 +1,8 @@
 import React, { use } from "react";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import Button from "./Button.jsx";
+import "../styles/CreateTeam.css";
 
 const CreateTeam = () => {
   const [teams, setTeams] = useState([]);
@@ -106,64 +108,78 @@ const CreateTeam = () => {
     alert("Equipo eliminado");
   };
 
+  const buttonCreateTeam = (e) => {
+    e.preventDefault();
+    setState("create");
+    setSelectedId("");
+    reset({
+      name: "",
+    });
+  };
+
   return (
     <div className="create-team">
-      <select
-        value={selectedId}
-        onChange={(e) => setSelectedId(e.target.value)}
-      >
-        <option value="">Crear nuevo equipo</option>
-        {teams.map((team) => (
-          <option key={team._id} value={team._id}>
-            {team.name}
-          </option>
-        ))}
-      </select>
-      {state === "edit" && (
-        <button
-          type="button"
-          onClick={() => {
-            setState("create");
-            setSelectedId("");
-            reset({
-              name: "",
-            });
-          }}
+      <section className="create-team-header">
+        <select
+          className="selected-team"
+          value={selectedId}
+          onChange={(e) => setSelectedId(e.target.value)}
         >
-          Crear nuevo equipo
-        </button>
-      )}
+          <option value="">Selecciona equipo</option>
+          {teams.map((team) => (
+            <option key={team._id} value={team._id}>
+              {team.name}
+            </option>
+          ))}
+        </select>
+        {state === "edit" && (
+          <Button
+            type="button"
+            text="Crear Equipo"
+            onClick={buttonCreateTeam}
+          />
+        )}
+      </section>
 
       {state && (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <label>Nombre: </label>
-          <input {...register("name")} />
-          <label>Selecciona el entrenador: </label>
-          <select {...register("coach")}>
-            <option value="">Selecciona entrenador</option>
-            {coaches.map((coach) => (
-              <option key={coach._id} value={coach._id}>
-                {coach.lastName}, {coach.firstName}
-              </option>
-            ))}
-          </select>
-          <label>Selecciona los jugadores: </label>
-          {players.map((player) => (
-            <div key={player._id}>
-              <input
-                type="checkbox"
-                value={player._id}
-                {...register("players")}
-              />
-              {player.lastName}, {player.firstName}
+        <form className="section-form" onSubmit={handleSubmit(onSubmit)}>
+          <section className="form-subsection subsection-a">
+            <div>
+              <label>Nombre: </label>
+              <input {...register("name")} />
             </div>
-          ))}
-          <button type="submit">
-            {state === "create" ? "Crear equipo" : "Guardar cambios"}
-          </button>
-          <button type="button" onClick={handleDelete}>
-            Borrar equipo
-          </button>
+            <div>
+              <label>Entrenador: </label>
+              <select {...register("coach")}>
+                <option value="">Selecciona entrenador</option>
+                {coaches.map((coach) => (
+                  <option key={coach._id} value={coach._id}>
+                    {coach.lastName}, {coach.firstName}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </section>
+          <section className="form-subsection subsection-b">
+            <label>Selecciona los jugadores: </label>
+            <hr className="line"/>
+          </section>
+          <section className="form-subsection subsection-c">
+            {players.map((player) => (
+              <div key={player._id}>
+                <input
+                  type="checkbox"
+                  value={player._id}
+                  {...register("players")}
+                />
+                {player.lastName}, {player.firstName}
+              </div>
+            ))}
+          </section>
+          <section className="form-subsection subsection-d">
+            <Button type="submit" text="Guardar" />
+            <Button type="button" text="Borrar" onClick={handleDelete} />
+          </section>
         </form>
       )}
     </div>
