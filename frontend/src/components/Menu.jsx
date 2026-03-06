@@ -14,7 +14,6 @@ const Menu = ({ setMode }) => {
   const navigate = useNavigate();
   const [teamOfPlayer, setTeamOfPlayer] = useState({});
   const [teamMister, setTeamMister] = useState([{}]);
-  /* const [matchesTeam, setMatchesTeam] = useState([]); */
   const [allMatches, setAllMatches] = useState([]);
   const [openId, setOpenId] = useState(null);
   const [allTeams, setAllTeams] = useState([]);

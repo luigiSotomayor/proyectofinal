@@ -1,0 +1,39 @@
+.create-user-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.encabezado {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+}
+
+.select-user-section {
+    max-width: 300px;
+    max-height: 20px;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px 0px;
+    gap: 8px;
+}
+
+.subsection-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.button-form {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    gap: 20px;
+    margin: 10px auto;
+}
