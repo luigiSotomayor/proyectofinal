@@ -116,6 +116,16 @@ flowchart TD
 git clone https://github.com/luigiSotomayor/proyectofinal.git
 cd proyectofinal
 npm install
+//tendrás dos carpetas: backend y frontend
+//hay que instalar las dependencia en cada una
+cd backend
+npm install
+//lanzas el backend desde la propia carpeta
+npm run dev
+cd..
+cd frontend
+npm install
+//lanzas el frontend desde la propia carpeta
 npm run dev
 ```
 
