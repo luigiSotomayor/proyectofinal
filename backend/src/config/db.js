@@ -8,4 +8,3 @@ export const connectDB = async () => {
         console.log("Fallo en la conexión con la base de datos");    }
 };
 
-//export default { connectDB };

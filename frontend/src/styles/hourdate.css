@@ -7,13 +7,3 @@
   height: 40px;
   gap: 20px;
 }
-/*
-.hourDateDisplay > p {
-  transform: translateX(100%);
-}
-
-@media (max-width: 930px){
-  .hourDateDisplay > p{
-    transform: translateX(0%);
-  }
-} */
