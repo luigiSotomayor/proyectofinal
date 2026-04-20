@@ -3,7 +3,6 @@ import express, { json } from "express";
 import { connectDB } from "./src/config/db.js";
 import matchRouter from "./src/api/routes/match.js";
 import userRouter from "./src/api/routes/user.js";
-import trainingRouter from "./src/api/routes/training.js";
 import teamRouter from "./src/api/routes/team.js";
 import cors from "cors";
 
@@ -21,7 +20,6 @@ app.use(cors({
 app.use(json());   
 
 app.use("/api/v1/user", userRouter);
-app.use("/api/v1/trainig", trainingRouter);
 app.use("/api/v1/team", teamRouter);
 app.use("/api/v1/match", matchRouter);
 

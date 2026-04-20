@@ -1,4 +1,3 @@
-import "./App.css";
 import { ToastContainer, Slide } from "react-toastify";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
