@@ -83,6 +83,16 @@ Es sistema está preparado para incorporar nuevas funcionalidades como:
 - Sistema de scouting
 - Tienda online
 
+## 🔄 Flujo de la aplicación
+```mermaid
+flowchart TD
+    A[Login] --> B[Autenticación]
+    B --> C{Rol}
+    C -->|Jugador| D[Ver partidos]
+    C -->|Entrenador| E[Gestionar partidos]
+    C -->|Director deportivo| F[Gestión completa]
+```
+
 ## 🤝 Contribuciones
 
 1. Fork del proyecto

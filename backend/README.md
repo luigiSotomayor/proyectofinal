@@ -44,10 +44,10 @@ src/
 └── index.js  
 
 ## 🧠 Arquitectura
-- Routes -> endpoints
-- Controllers -> lógica
-- Models -> datos
-- Middlewares -> auth y control
+- Routes → endpoints
+- Controllers → lógica
+- Models → datos
+- Middlewares → auth y control
 
 ## 🔐 Autenticación
 - JWT
