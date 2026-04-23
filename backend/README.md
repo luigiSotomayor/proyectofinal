@@ -7,7 +7,7 @@ API REST para la gestión de usuarios, equipos, partidos y estadísticas.
 
 ---
 
-## 🚀 Tecnologías
+## Tecnologías
 
 - Node.js
 - Express
@@ -19,7 +19,7 @@ API REST para la gestión de usuarios, equipos, partidos y estadísticas.
 
 ---
 
-## ⚙️ Instalación
+## Instalación
 
 ```bash
 npm install
@@ -31,7 +31,7 @@ Servidor en:
 http:localhost:3000
 ```
 
-## 📁 Estructura
+## Estructura
 src/  
 ├── api/  
 │   ├── controllers/  
@@ -43,54 +43,68 @@ src/
 ├── utils/  
 └── index.js  
 
-## 🧠 Arquitectura
+## Arquitectura
 - Routes → endpoints
 - Controllers → lógica
 - Models → datos
 - Middlewares → auth y control
 
-## 🔐 Autenticación
+## Autenticación
 - JWT
 - Middleware de protección de rutas
-- Control por roles
+- Control por roles  
 Roles:
 - jugador
 - entrenador
 - director deportivo
 
-## 📡 Endpoints principales
+## Endpoints
 Usuarios:
 ```bash
-POST /api/v1/users/register
-POST /api/v1/users/login
-GET  /api/v1/users
+GET     /api/v1/user/
+GET     /api/v1/user/role/:role
+GET     /api/v1/user/:id
+POST    /api/v1/user/
+POST    /api/v1/user/login
+PUT     /api/v1/user/:id
+DELETE  /api/v1/user/:id
 ```
 Equipos:
 ```bash
-GET    /api/v1/team
-POST   /api/v1/team
+GET    /api/v1/team/
+GET    /api/v1/team/:id
+GET    /api/v1/team/user/:userId
+GET    /api/v1/team/coach/:coachId
+POST   /api/v1/team/
 PUT    /api/v1/team/:id
 DELETE /api/v1/team/:id
 ```
 Partidos:
 ```bash
-GET    /api/v1/match
+GET    /api/v1/match/
 GET    /api/v1/match/:id
 GET    /api/v1/match/team/:teamId
-POST   /api/v1/match
+POST   /api/v1/match/
 PUT    /api/v1/match/:id
 DELETE /api/v1/match/:id
 ```
 
-## 📊 Modelo de datos
+## Modelo de datos
 Usuario:
 - firstName
 - lastName
+- birthday
+- phone
 - email
+- nationality
 - password
 - role
+- position
+- dorsal
+- userCode
 
 Equipo:
+- teamCode
 - name
 - coach
 - players[]
@@ -102,7 +116,17 @@ Partidos:
 - home
 - championship
 - jornada
-- stats[]
+- stats[ ]
+  - csvId
+  - player
+  - minutes
+  - titular
+  - yellowCards
+  - doubleYellowCards
+  - redCars
+  - goalsScored
+  - goalsConceded
+  - rating
 
 Incluye unas seeds para la carga inicial de datos.
 

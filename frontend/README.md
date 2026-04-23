@@ -1,13 +1,13 @@
 
 ---
 
-# 🎨 Frontend - STENELLA Club de Fútbol
+# Frontend - STENELLA Club de Fútbol
 
 Aplicación cliente desarrollada como **Single Page Application (SPA)** para la gestión de equipos, partidos y estadísticas.
 
 ---
 
-## 🚀 Tecnologías
+## Tecnologías
 
 - React
 - Vite
@@ -18,7 +18,7 @@ Aplicación cliente desarrollada como **Single Page Application (SPA)** para la 
 
 ---
 
-## ⚙️ Instalación
+## Instalación
 
 ```bash
 npm install
@@ -28,9 +28,8 @@ Aplicación disponible en:
 ```html
 http://localhost:5173
 ```
-## 📁 Estructura
-src/  
-├── assets/  
+## Estructura
+src/   
 ├── components/  
 ├── context/  
 ├── hooks/  
@@ -40,18 +39,18 @@ src/
 ├── App.jsx  
 └── main.jsx  
 
-## 🧠 Arquitectura
+## Arquitectura
 - Componentes reutilizables
 - Context API para estado global
 - React Hook Form para formularios
 - React Router para navegación
 
-## 🔐 Autenticación
+## Autenticación
 - Basada en JWT
 - Token almacenado en localStorage
 - Enviado en cada petición al backend
 
-## 🌐 API
+## API
 El frontend consume la API en:
 ```html
 http://localhost:3000/api/v1
@@ -61,12 +60,12 @@ Ejemplo de header:
 Authorization: Bearer <token>
 ```
 
-## 🎯 Funcionalidades
+## Funcionalidades
 - Login de usuarios
 - Visualización de partidos
 - Edición de estadísticas
 - Gestión según rol
 
-## ⚠️ Consideraciones
+## Consideraciones
 - Backend debe estar activo
 - Token requerido para rutas protegidas
